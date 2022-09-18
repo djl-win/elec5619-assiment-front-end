@@ -227,7 +227,7 @@ class Login extends React.Component {
     return (
       <div className="login">
         <div className="login-content">
-          <ToastContainer />
+          {/* <ToastContainer /> */}
           <div className="login-img">
             <img src={loginImg} alt="Login" />
           </div>
@@ -381,6 +381,7 @@ class Login extends React.Component {
               </DialogActions>
             </Dialog>
           </div>
+          <ToastContainer />
         </div>
       </div>
     );

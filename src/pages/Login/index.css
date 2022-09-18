@@ -82,6 +82,8 @@ img {
 
 .login-registre{
     position: absolute;
+    /* margin-top: -100%;
+    margin-left: 120%; */
     bottom: 1rem;
     width: 100%;
     background-color: var(--first-color-lighten);
@@ -95,6 +97,8 @@ img {
 .login-create {
     
   position: relative;
+  /* margin-top: -150%;
+  margin-left: 170%; */
   margin-top: -250px;
   bottom: 1rem;
   width: 100%;
