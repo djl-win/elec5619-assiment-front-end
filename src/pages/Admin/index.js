@@ -4,10 +4,11 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import MySidebar from "../../components/Admin/MySidebar";
 import Dashboard from "../Dashboard";
 import Venue1 from "../Venue1"
-import Venue2 from "../Venue2";
-
+import Venue2 from "../Venue2"
 
 class Admin extends React.Component {
+    
+
     render() {
         return (
             <div className="admin_page">
@@ -22,6 +23,7 @@ class Admin extends React.Component {
                     </Switch>
 
                 </div>
+
             </div>
         )
     }
