@@ -133,10 +133,10 @@ class Login extends React.Component {
     //4. 处理请求
     if (response.code === 200) {
       //下一步验证码输入
-      success("Sms Verification Code: " + response.data);
+      success("🦄 Sms Verification Code: " + response.data);
       this.handleOpen();
     } else {
-      error(response.msg);
+      error("🦄 " + response.msg);
       this.handleCleanFormData();
     }
   }
@@ -180,9 +180,9 @@ class Login extends React.Component {
     if (response.code === 200) {
       //跳转页面
       this.handlePageLogin();
-      success(response.data)
+      success("🦄 " + response.data)
     } else {
-      error(response.msg)
+      error("🦄 " + response.msg)
     }
 
   };
@@ -213,7 +213,8 @@ class Login extends React.Component {
       this.handleCleanFormData();
 
       //页面跳转
-
+      this.props.history.push('/')
+      
     }else{
       error("🦄 " + response.msg);
       this.setState({

@@ -7,7 +7,7 @@ import {toast} from 'react-toastify';
 
 export default function ajax(url, data = {}, type = 'GET') {
     return new Promise((resolve, reject) => {
-        let promise/* 这里用let是因为const不允许在声明时不赋值;而且单独提一个promise出来是因为下面有两种情况 */
+        let promise; //const使用时必须赋值
         // 1.执行异步ajax请求
         if (type === 'GET') {
             promise = axios.get(url, {

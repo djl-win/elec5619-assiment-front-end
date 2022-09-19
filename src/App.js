@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Login from "./pages/Login"
-
+import Admin from "./pages/Admin"
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
-        {/* <Route path="/rank" component={Rank} /> */}
+       <Route path="/" component={Admin} />
       </Switch>
     </Router>
 
