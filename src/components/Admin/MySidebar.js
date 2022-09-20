@@ -14,6 +14,7 @@ import {
 } from "@material-ui/icons";
 import Item from "./Item";
 import { useState } from "react";
+import { LogoutRounded } from "@mui/icons-material";
 
 function MySidebar() {
   const [open, setOpen] = useState(true);
@@ -122,7 +123,7 @@ function MySidebar() {
             >
               Home
             </motion.h3>
-            <Item icon={<DashboardRounded />} name="Dashboard" address="/Dashboard"/>
+            <Item icon={<DashboardRounded />} name="Dashboard" address="/Dashboard" />
             {/* <Item icon={<BarChartRounded />} name="Performance" /> */}
           </div>
         </div>
@@ -134,8 +135,8 @@ function MySidebar() {
             Museum
           </motion.h3>
           <Item icon={<MuseumRounded />} name="Venue 1" address="/Venue1" />
-          <Item icon={<ApartmentRounded />} name="Venue 2" address="/Venue2"/>{" "}
-          <Item icon={<ComputerRounded />} name="Venue 3" address="/Venue3"/>
+          <Item icon={<ApartmentRounded />} name="Venue 2" address="/Venue2" />{" "}
+          <Item icon={<ComputerRounded />} name="Venue 3" address="/Venue3" />
         </div>
         {/* group 3 */}
         <div className="group">
@@ -144,13 +145,22 @@ function MySidebar() {
           >
             Analytics
           </motion.h3>
-          <Item icon={<PeopleAltRounded />} name="Portraits" address="/Portraits"/>
+          <Item icon={<PeopleAltRounded />} name="Portraits" address="/Portraits" />
           <Item icon={<HistoryRounded />} name="History" address="/History" />
-          <Item icon={<CommentRounded />} name="Comments" address="/Comments"/>
-          <Item icon={<SettingsRemoteRounded />} name="Visitors" address="/Visitors"/>
-          <Item icon={<ColorLensRounded />} name="Setting" address="/Setting"/>
+          <Item icon={<CommentRounded />} name="Comments" address="/Comments" />
+          <Item icon={<SettingsRemoteRounded />} name="Visitors" address="/Visitors" />
+          <Item icon={<ColorLensRounded />} name="Setting" address="/Setting" />
+        </div>
+        <div className="group">
+          <motion.h3
+            animate={{ opacity: open ? 1 : 0, height: open ? "auto" : 0 }}
+          >
+            Others
+          </motion.h3>
+          <Item icon={<LogoutRounded />} name="Log out" address="/login" />
         </div>
       </motion.div>
+
     </motion.div>
 
   );

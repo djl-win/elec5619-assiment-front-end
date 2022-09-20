@@ -12,7 +12,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import {storageUtils} from "../../utils/storageUtils"
 
 class Login extends React.Component {
   state = {
@@ -43,6 +43,12 @@ class Login extends React.Component {
     errors: {}
 
   }
+
+  //页面加载时，移除内存中的登录storage
+  componentDidMount() {
+    storageUtils.removeUser();
+  }
+
   //打开验证码页面
   handleOpen = () => {
     this.setState({
@@ -211,6 +217,9 @@ class Login extends React.Component {
 
       //清楚数据
       this.handleCleanFormData();
+
+      //存储用户登录信息
+      storageUtils.saveUser("login successfuly!")
 
       //页面跳转
       this.props.history.push('/')

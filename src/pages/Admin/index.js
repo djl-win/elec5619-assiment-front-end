@@ -5,27 +5,41 @@ import MySidebar from "../../components/Admin/MySidebar";
 import Dashboard from "../Dashboard";
 import Venue1 from "../Venue1"
 import Venue2 from "../Venue2"
+import Venue3 from "../Venue3"
+import {storageUtils} from "../../utils/storageUtils"
+import { error } from '../../utils/message.js'
 
 class Admin extends React.Component {
-    
 
-    render() {
-        return (
-            <div className="admin_page">
-                <MySidebar></MySidebar>
-                <div className="admin_page_body">
+render() {
 
-                    <Switch>
-                        <Route path="/Dashborad" component={Dashboard} />
-                        <Route path="/Venue1" component={Venue1} />
-                        <Route path="/Venue2" component={Venue2} />
-                        <Redirect to = "/Dashborad" />
-                    </Switch>
+    //登录验证
+    const user = storageUtils.getUser();
+    // 如果内存没有存储user（即当前没有登录）（注意网页一刷新，内存就会没）
+    if(!user || user === '') {
+        error("Please login, then to asscess this system!")
+    // 自动跳转到登录界面(注意：在render()里面跳转页面通常用<Redirect/>，在事件回调函数的跳转页面则用history)
+    return <Redirect to='/login' />
 
-                </div>
+}
+
+    return (
+        <div className="admin_page">
+            <MySidebar></MySidebar>
+            <div className="admin_page_body">
+
+                <Switch>
+                    <Route path="/Dashborad" component={Dashboard} />
+                    <Route path="/Venue1" component={Venue1} />
+                    <Route path="/Venue2" component={Venue2} />
+                    <Route path="/Venue3" component={Venue3} />
+                    <Redirect to="/Dashborad" />
+                </Switch>
 
             </div>
-        )
-    }
+
+        </div>
+    )
+}
 };
 export default Admin;
