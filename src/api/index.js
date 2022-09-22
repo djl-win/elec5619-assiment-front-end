@@ -11,3 +11,6 @@ export const reqRegister = (adminUsername, adminPassword,peopleName,peopleGender
 
 //验证码接口
 export const reqCheckCode = (smsCode) => ajax(BASE + '/5619/admins/login/verify/'+ smsCode, null, 'GET')
+
+//查询管理员信息接口
+export const reqAdminInfo= () => ajax(BASE + '/5619/admins/adminInfo', null, 'GET')

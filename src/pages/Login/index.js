@@ -1,7 +1,7 @@
 import * as React from "react";
 import './index.css';
 import loginImg from "./img/login.svg";
-import { ToastContainer } from 'react-toastify';
+// import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { reqLogin, reqRegister, reqCheckCode} from '../../api'
 import { success, error, warn } from '../../utils/message.js'
@@ -46,6 +46,7 @@ class Login extends React.Component {
 
   //页面加载时，移除内存中的登录storage
   componentDidMount() {
+    localStorage.removeItem("avatar")
     storageUtils.removeUser();
   }
 
@@ -209,20 +210,22 @@ class Login extends React.Component {
     
     //3.数据验证
     if(response.code === 200){
-      //成功输入
-      success("🦄 Welcome!")
 
       //关闭dialog
       this.handleClose();
 
+      //存储用户登录信息
+      storageUtils.saveUser("login successfuly!")
+      localStorage.setItem("avatar", "https://api.multiavatar.com/avatarzzz" + this.state.field.adminUsername +".png")
+
       //清楚数据
       this.handleCleanFormData();
 
-      //存储用户登录信息
-      storageUtils.saveUser("login successfuly!")
-
       //页面跳转
       this.props.history.push('/')
+
+      //提示信息
+      success("🦄 Welcome!")
       
     }else{
       error("🦄 " + response.msg);
@@ -391,7 +394,7 @@ class Login extends React.Component {
               </DialogActions>
             </Dialog>
           </div>
-          <ToastContainer />
+          {/* <ToastContainer /> */}
         </div>
       </div>
     );
