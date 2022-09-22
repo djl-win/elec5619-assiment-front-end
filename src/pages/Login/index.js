@@ -3,7 +3,7 @@ import './index.css';
 import loginImg from "./img/login.svg";
 // import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { reqLogin, reqRegister, reqCheckCode} from '../../api'
+import { reqLogin, reqRegister, reqCheckCode, reqAdminInfo } from '../../api'
 import { success, error, warn } from '../../utils/message.js'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -12,7 +12,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {storageUtils} from "../../utils/storageUtils"
+import { storageUtils } from "../../utils/storageUtils"
 
 class Login extends React.Component {
   state = {
@@ -54,7 +54,7 @@ class Login extends React.Component {
   handleOpen = () => {
     this.setState({
       smsVisible: true,
-      smsCode:''
+      smsCode: ''
     })
   };
 
@@ -62,7 +62,7 @@ class Login extends React.Component {
   handleClose = () => {
     this.setState({
       smsVisible: false,
-      smsCode:''
+      smsCode: ''
     })
   }
 
@@ -207,16 +207,26 @@ class Login extends React.Component {
 
     //2.提交表单
     const response = await reqCheckCode(smsCode);
-    
+
     //3.数据验证
-    if(response.code === 200){
+    if (response.code === 200) {
 
       //关闭dialog
       this.handleClose();
 
-      //存储用户登录信息
-      storageUtils.saveUser("login successfuly!")
-      localStorage.setItem("avatar", "https://api.multiavatar.com/avatarzzz" + this.state.field.adminUsername +".png")
+      //存储用户的详细信息用于登录
+
+      //1.获取请求
+      const res = await reqAdminInfo();
+
+      //2.绑定数据
+      if (res.code === 200) {
+        storageUtils.saveUser(res.data)
+      } else {
+        error("🦄 " + response.msg);
+      }
+
+      localStorage.setItem("avatar", "https://api.multiavatar.com/goHD" + this.state.field.adminUsername + ".png")
 
       //清楚数据
       this.handleCleanFormData();
@@ -226,11 +236,11 @@ class Login extends React.Component {
 
       //提示信息
       success("🦄 Welcome!")
-      
-    }else{
+
+    } else {
       error("🦄 " + response.msg);
       this.setState({
-        smsCode:''
+        smsCode: ''
       })
     }
   }
@@ -371,7 +381,7 @@ class Login extends React.Component {
               <DialogTitle>Verification</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                Please enter the verification code within 120s
+                  Please enter the verification code within 120s
                 </DialogContentText>
                 <TextField
                   autoFocus

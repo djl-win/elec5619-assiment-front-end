@@ -1,37 +1,13 @@
 import React from "react";
-import { reqAdminInfo } from "../../api"
-import { error } from "../../utils/message"
+import { storageUtils } from "../../utils/storageUtils"
+import Slide from '@mui/material/Slide';
 
 class Profile extends React.Component {
-  state = {
-    adminInfo: {}
-  }
-  //页面加载时，查询该管理员的个人信息
-  componentDidMount() {
-    this.handleAdmin();
-  }
-
-  //获取管理员信息
-  handleAdmin = async () => {
-
-    //1.获取请求
-    const response = await reqAdminInfo();
-
-    //2.绑定数据
-    if (response.code === 200) {
-      this.setState({
-        adminInfo: response.data
-      })
-    } else {
-      error("🦄 " + response.msg);
-    }
-
-
-  }
-
 
   render() {
+    const adminInfo = storageUtils.getUser();
     return (
+      <Slide in={true} mountOnEnter unmountOnExit>
       <div
         style={{
           display: "grid",
@@ -86,16 +62,17 @@ class Profile extends React.Component {
               padding: "0 40px",
             }}
           >
-            <h3>Name :</h3>{this.state.adminInfo.peopleName}
-            <h3>Gender :</h3>{
-                 (this.state.adminInfo.peopleGender === 1 && 'Boy')|| (this.state.adminInfo.peopleGender === 2 && 'Girl')
-              }
-            <h3>Age :</h3>{this.state.adminInfo.peopleAge}
-            <h3>Email:</h3>{this.state.adminInfo.peopleEmail}
-            <h3>Phone:</h3>{this.state.adminInfo.peoplePhone}
+            <h3>Name :</h3> {adminInfo.peopleName}&nbsp;
+            <h3>Gender :</h3> {
+                 (adminInfo.peopleGender === 1 && 'Boy')|| (adminInfo.peopleGender === 2 && 'Girl')
+              }&nbsp;
+            <h3>Age :</h3>{adminInfo.peopleAge}&nbsp;
+            <h3>Email :</h3>{adminInfo.peopleEmail}&nbsp;
+            <h3>Phone :</h3>{adminInfo.peoplePhone}&nbsp;
           </div>
         </div>
       </div>
+      </Slide>
     );
   };
 }
