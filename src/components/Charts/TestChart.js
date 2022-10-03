@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable react/no-multi-comp */
 import React, { PureComponent } from 'react';
+import { reqSevenDaysData } from '../../api'
 import {
   LineChart,
   Line,
@@ -11,43 +12,14 @@ import {
   Legend,
   LabelList
 } from "recharts";
-const data = [
-  {
-    visitDate: '2022-01-02',
-    traffic: 4000,
-  },
-  {
-    visitDate: '2022-01-02',
-    traffic: 3000,
-  },
-  {
-    visitDate: '2022-01-02',
-    traffic: 2000,
-  },
-  {
-    visitDate: '2022-01-02',
-    traffic: 2780,
-  },
-  {
-    visitDate: '2022-01-02',
-    traffic: 1890,
-  },
-  {
-    visitDate: '2022-01-02',
-    traffic: 2390,
-  },
-  {
-    visitDate: '2022-01-02',
-    traffic: 3490,
-  },
-];
 
 class CustomizedLabel extends PureComponent {
+
   render() {
-    const { x, y,  value } = this.props;
+    const { x, y, value } = this.props;
 
     return (
-      <text x={x} y={y} dy={-4} fill="white"  fontSize={15} textAnchor="middle" >
+      <text x={x} y={y} dy={-4} fill="white" fontSize={15} textAnchor="middle" >
         {value}
       </text>
     );
@@ -69,29 +41,46 @@ class CustomizedAxisTick extends PureComponent {
 }
 
 export default class TestChart extends PureComponent {
+  state = {
+    sevenDaysData:[]
+  }
+
+  //页面加载时,获取数据
+  componentDidMount() {
+    this.handleSevenDaysData();
+  }
+
+  //获取7日内的数据
+  handleSevenDaysData = async () => {
+    const response = await reqSevenDaysData();
+    this.setState({
+      sevenDaysData: response.data
+    })
+    console.log(response.data)
+  }
 
   render() {
     return (
       <LineChart
-      width={800}
-      height={600}
-      data={data}
-      margin={{
-        top: 20,
-        right: 30,
-        left: 20,
-        bottom: 10
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" stroke='white' />
-      <XAxis stroke='white' dataKey="visitDate"  height={60} tick={<CustomizedAxisTick />} />
-      <YAxis stroke='white'  />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="traffic" stroke="pink">
-        <LabelList content={<CustomizedLabel />} />
-      </Line>
-    </LineChart>
+        width={800}
+        height={600}
+        data={this.state.sevenDaysData}
+        margin={{
+          top: 20,
+          right: 30,
+          left: 20,
+          bottom: 10
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" stroke='white' />
+        <XAxis stroke='white' dataKey="date" height={60} tick={<CustomizedAxisTick />} />
+        <YAxis stroke='white' />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="visitorNumber" stroke="pink">
+          <LabelList content={<CustomizedLabel />} />
+        </Line>
+      </LineChart>
     );
   }
 }

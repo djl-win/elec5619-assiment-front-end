@@ -14,3 +14,6 @@ export const reqCheckCode = (smsCode) => ajax(BASE + '/5619/admins/login/verify/
 
 //查询管理员信息接口
 export const reqAdminInfo= () => ajax(BASE + '/5619/admins/adminInfo', null, 'GET')
+
+//查询7日内的访客数据
+export const reqSevenDaysData = () =>ajax(BASE + '/5619/visits/sevendays', null, 'GET')
