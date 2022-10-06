@@ -139,8 +139,8 @@ function MySidebar() {
               Museum
             </motion.h3>
             <Item icon={<MuseumRounded />} name="Venue 1" address="/Venue1" />
-            <Item icon={<ApartmentRounded />} name="Venue 2" address="/Venue2" />{" "}
-            <Item icon={<ComputerRounded />} name="Venue 3" address="/Venue3" />
+            <Item icon={<MuseumRounded />} name="Venue 2" address="/Venue2" />{" "}
+            <Item icon={<MuseumRounded />} name="Venue 3" address="/Venue3" />
           </div>
           {/* group 3 */}
           <div className="group">
