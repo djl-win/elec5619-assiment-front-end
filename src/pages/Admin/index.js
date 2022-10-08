@@ -2,6 +2,7 @@ import React from "react";
 import './index.css';
 import { Redirect, Route, Switch } from 'react-router-dom'
 import MySidebar from "../../components/Admin/MySidebar";
+import Header from "../../components/Admin/Header";
 import Dashboard from "../Dashboard";
 import Venue1 from "../Venue1"
 import Venue2 from "../Venue2"
@@ -29,7 +30,8 @@ class Admin extends React.Component {
 
         return (
             <div className="admin_page">
-                <MySidebar></MySidebar>
+                <MySidebar>
+                </MySidebar>
                 <Switch>
                     <Route path="/Profile" component={Profile} />
                     <Route path="/Dashborad" component={Dashboard} />

@@ -3,11 +3,11 @@
   font-family: "IBM Plex Sana Thai Looped", sans-serif;
   color: black;
   background: #F6FBFF;
-  //text-shadow: 1px 0px 2px #8dc4f0;
   width: 100%;
   height: 100%;
   /* font-size: medium; */
 }
+
 .sidebar_container {
   height: 100vh;
   position: sticky;
