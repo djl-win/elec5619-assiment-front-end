@@ -34,6 +34,7 @@ const Header = () => {
         main: "#FFFFFF",
         contrastText: "000000"
       },
+      secondary: {
         main: "#448aff",
         contrastText: "#FFFFFF",
       },
