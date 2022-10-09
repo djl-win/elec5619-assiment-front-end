@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import TestChart from "../Charts/TestChart";
 
 
 
@@ -39,9 +40,9 @@ const ChartContainer = () => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+            <Grid container spacing={0}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+              <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
                     p: 2,
@@ -66,10 +67,22 @@ const ChartContainer = () => {
                   total visitor
                 </Paper>
               </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  Available car spot
+                </Paper>
+              </Grid>
               {/* Chart */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  Available car spot
+                  <TestChart/>
                 </Paper>
               </Grid>
             </Grid>
