@@ -11,6 +11,8 @@ import Portraits from "../Portraits"
 import { storageUtils } from "../../utils/storageUtils"
 import { error } from '../../utils/message.js'
 import Profile from "../Profile";
+import Box from '@mui/material/Box';
+
 
 class Admin extends React.Component {
 
@@ -30,8 +32,11 @@ class Admin extends React.Component {
 
         return (
             <div className="admin_page">
-                <MySidebar>
-                </MySidebar>
+                <Box sx={{ display: 'flex' }}>
+                    <Header></Header>
+                    <MySidebar></MySidebar>
+                </Box>
+                
                 <Switch>
                     <Route path="/Profile" component={Profile} />
                     <Route path="/Dashborad" component={Dashboard} />
