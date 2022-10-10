@@ -1,11 +1,11 @@
 import React from "react";
-
+import ChartCon from "../../components/DashboardCom/VenueContainer";
 
 class Venue1 extends React.Component {
     render() {
         return (
             <div className="admin_Venue1">
-                <h1>Venue1</h1>
+                <ChartCon></ChartCon> 
             </div>
         )
     }

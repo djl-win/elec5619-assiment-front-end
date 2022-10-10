@@ -1,7 +1,7 @@
 
 import React from "react";
 import TestChart from "../../components/Charts/TestChart";
-import ChartCon from "../../components/DashboardCom/ChartContainer";
+import ChartCon from "../../components/DashboardCom/DashContainer";
 import "./index.css"
 import Box from '@mui/material/Box';
 

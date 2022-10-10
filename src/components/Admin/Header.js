@@ -45,7 +45,7 @@ const Header = () => {
     <ThemeProvider theme={theme}>
          <AppBar position="absolute">
             <Toolbar sx={{
-              pr: '24px',
+              pr: '30px',
             }}
             >
 
@@ -66,7 +66,7 @@ const Header = () => {
                 </IconButton>            
               </Tooltip>                  
               <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: '50px' }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{

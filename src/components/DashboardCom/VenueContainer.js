@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import TestChart from "../Charts/TestChart";
+import Typography from '@mui/material/Typography';
 
 
 
@@ -36,7 +37,18 @@ const ChartContainer = () => {
           }}
         >
           <Toolbar />
-          <Container maxWidth="xl" position = "relative" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="xl" sx={{ mt: 6, mb: 6 }}>
+            <Grid item xs={12}>
+              <Box  sx={{ display: 'flex', alignItems: 'end'}}>
+                <Typography
+                  variant="h4"
+                  color="inherit"
+                  noWrap
+                  >
+                  Venue1
+                </Typography>
+              </Box>          
+            </Grid>
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12} md={6} lg={4}>
@@ -73,7 +85,7 @@ const ChartContainer = () => {
                     height: 240,
                   }}
                 >
-                  Available car spot
+                  Action
                 </Paper>
               </Grid>
               {/* Chart */}
