@@ -57,7 +57,7 @@ class Profile extends React.Component {
         >
           <div
             style={{
-              color: "rgba(255,255,255,0.6)",
+              color: "black",
               borderBottom: "2px solid rgba(255,255,255,0.2)",
               padding: "0 40px",
             }}

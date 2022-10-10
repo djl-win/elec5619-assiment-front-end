@@ -1,8 +1,8 @@
 .admin_page {
   display: flex;
   font-family: "IBM Plex Sana Thai Looped", sans-serif;
-  color: white;
-  background: linear-gradient(179deg, #176eb5, #d545d7);
+  color: black;
+  background: white;
   text-shadow: 1px 0px 2px #8dc4f0;
   width: 100%;
   height: 100%;

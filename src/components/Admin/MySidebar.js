@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 import {
-
-  ApartmentRounded,
   ColorLensRounded,
   DashboardRounded,
   SettingsRemoteRounded,
@@ -9,8 +7,7 @@ import {
   PeopleAltRounded,
   HistoryRounded,
   CommentRounded,
-  MuseumRounded,
-  ComputerRounded,
+  MuseumRounded
 } from "@material-ui/icons";
 import Item from "./Item";
 import { useState } from "react";
@@ -115,7 +112,7 @@ function MySidebar() {
               <img
                 src={localStorage.getItem("avatar")}
                 alt="profile_img"
-              />
+              /> 
             </motion.div>
           </Link>
           {/* groups */}
@@ -139,8 +136,8 @@ function MySidebar() {
               Museum
             </motion.h3>
             <Item icon={<MuseumRounded />} name="Venue 1" address="/Venue1" />
-            <Item icon={<ApartmentRounded />} name="Venue 2" address="/Venue2" />{" "}
-            <Item icon={<ComputerRounded />} name="Venue 3" address="/Venue3" />
+            <Item icon={<MuseumRounded />} name="Venue 2" address="/Venue2" />{" "}
+            <Item icon={<MuseumRounded />} name="Venue 3" address="/Venue3" />
           </div>
           {/* group 3 */}
           <div className="group">

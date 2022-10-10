@@ -19,7 +19,7 @@ class CustomizedLabel extends PureComponent {
     const { x, y, value } = this.props;
 
     return (
-      <text x={x} y={y} dy={-4} fill="white" fontSize={15} textAnchor="middle" >
+      <text x={x} y={y} dy={-4} fill="BLACK" fontSize={15} textAnchor="middle" >
         {value}
       </text>
     );
@@ -32,7 +32,7 @@ class CustomizedAxisTick extends PureComponent {
 
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="end" fontSize={15} fill="white" transform="rotate(-15)">
+        <text x={0} y={0} dy={16} textAnchor="end" fontSize={15} fill="BLACK" transform="rotate(-15)">
           {payload.value}
         </text>
       </g>
@@ -73,11 +73,11 @@ export default class TestChart extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" stroke='white' />
-        <XAxis stroke='white' dataKey="date" height={60} tick={<CustomizedAxisTick />} />
-        <YAxis stroke='white' />
+        <XAxis stroke='BLACK' dataKey="date" height={60} tick={<CustomizedAxisTick />} />
+        <YAxis stroke='BLACK' />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="visitorNumber" stroke="pink">
+        <Line type="monotone" dataKey="visitorNumber" stroke="BLACK">
           <LabelList content={<CustomizedLabel />} />
         </Line>
       </LineChart>
