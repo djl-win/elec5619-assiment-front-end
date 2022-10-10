@@ -17,3 +17,15 @@ export const reqAdminInfo= () => ajax(BASE + '/5619/admins/adminInfo', null, 'GE
 
 //查询7日内的访客数据
 export const reqSevenDaysData = () =>ajax(BASE + '/5619/visits/sevendays', null, 'GET')
+
+//查询博物馆的容量
+export const reqMuseumCapacity = () =>ajax(BASE + '/5619/visits/capacity', null, 'GET')
+
+//查询博物馆的实时流量
+export const reqRealTimeCapacity = () =>ajax(BASE + '/5619/visits/today/totalrealtimeflow', null, 'GET')
+
+//查询当日总流量
+export const reqTodayTotalVisitor = () =>ajax(BASE + '/5619/visits/today/totalflow', null, 'GET')
+
+//查询停车场信息
+export const reqParkingLotInfo = () =>ajax(BASE + '/5619/parkinglots', null, 'GET')

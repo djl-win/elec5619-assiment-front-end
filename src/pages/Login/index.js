@@ -282,7 +282,7 @@ class Login extends React.Component {
 
               <a onClick={this.handleLogin} className="login-button">Sign In</a>
               <div>
-                <span className="login-account">Don't have an account?</span>
+                <span className="login-account">Don't have an account? </span>
                 <span onClick={this.handlePageRegister} className="login-signin" id="sign-up">Sign Up</span>
               </div>
             </form>
@@ -373,7 +373,7 @@ class Login extends React.Component {
               <a onClick={this.handleRegister} className="login-button">Sign Up</a>
 
               <div>
-                <span className="login-account">Already have an account?</span>
+                <span className="login-account">Already have an account? </span>
                 <span onClick={this.handlePageLogin} className="login-signup" id="sign-in">Sign In</span>
               </div>
             </form>

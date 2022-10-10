@@ -72,12 +72,13 @@ export default class TestChart extends PureComponent {
           bottom: 10
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" stroke='white' />
+        <CartesianGrid strokeDasharray="3 3"/>
         <XAxis stroke='BLACK' dataKey="date" height={60} tick={<CustomizedAxisTick />} />
         <YAxis stroke='BLACK' />
         <Tooltip />
+
         <Legend />
-        <Line type="monotone" dataKey="visitorNumber" stroke="BLACK">
+        <Line type="monotone" dataKey="visitorNumber" stroke="#8884d8" activeDot={{ r: 8 }}>
           <LabelList content={<CustomizedLabel />} />
         </Line>
       </LineChart>

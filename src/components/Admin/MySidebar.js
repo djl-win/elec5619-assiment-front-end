@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import {
+
   ColorLensRounded,
   DashboardRounded,
   SettingsRemoteRounded,
@@ -7,7 +8,7 @@ import {
   PeopleAltRounded,
   HistoryRounded,
   CommentRounded,
-  MuseumRounded
+  MuseumRounded,
 } from "@material-ui/icons";
 import Item from "./Item";
 import { useState } from "react";

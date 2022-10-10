@@ -37,6 +37,7 @@ class Profile extends React.Component {
             style={{
               height: "140px",
               width: "140px",
+              marginLeft: "10px",
               boxShadow: "0 0 42px 0 rgba( 255, 255, 255, 0.17 )",
               background: "rgba( 255, 255, 255, 0.25 )",
               backdropFilter: "blur( 4px )",
