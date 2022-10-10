@@ -18,8 +18,7 @@ const updateProfile = (props) => {
     <form {...props}>
       <Card>
         <CardHeader
-          subheader="Update Profile"
-          title="Password"
+          title="Update Profile"
         />
         <Divider />
         <CardContent>
