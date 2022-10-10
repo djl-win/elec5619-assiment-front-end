@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import TestChart from "../Charts/TestChart";
 import Typography from '@mui/material/Typography';
+import RealTimeVisitor from "./RealTimeVisitor";
 
 
 
@@ -39,11 +40,9 @@ const ChartContainer = () => {
           <Toolbar />
           <Container maxWidth="xl" sx={{ mt: 6, mb: 6 }}>
             <Grid item xs={12}>
-              <Box  sx={{ display: 'flex', alignItems: 'end'}}>
+              <Box  sx={{ display: 'flex', alignItems: 'center'}}>
                 <Typography
                   variant="h4"
-                  color="inherit"
-                  noWrap
                   >
                   Dashboard
                 </Typography>
@@ -60,7 +59,7 @@ const ChartContainer = () => {
                     height: 240,
                   }}
                 >
-                  realtime visit
+                  <RealTimeVisitor/>
                 </Paper>
               </Grid>
               {/* Chart */}
