@@ -1,5 +1,5 @@
 import React from "react";
-import ChartCon from "../../components/VenueContainer/VenueContainer";
+import ChartCon from "../../components/Venue/VenueContainer";
 
 class Venue1 extends React.Component {
     render() {
