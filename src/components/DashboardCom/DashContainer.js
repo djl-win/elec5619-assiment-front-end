@@ -8,9 +8,11 @@ import TestChart from "../Charts/TestChart";
 import Typography from '@mui/material/Typography';
 import "./DashContainer.css";
 import Stack from '@mui/material/Stack';
-import { reqMuseumCapacity, reqRealTimeCapacity, reqTodayTotalVisitor,reqParkingLotInfo } from '../../api'
+import { reqMuseumCapacity, reqRealTimeCapacity, reqTodayTotalVisitor, reqParkingLotInfo } from '../../api'
 import { useState, useEffect } from 'react';
 import { error } from '../../utils/message.js'
+import MuseumRealTimeChart from '../Charts/MuseumRealTimeChart';
+import IconButton from '@mui/material/IconButton';
 
 const ChartContainer = () => {
   const [realTimeVisitors, setRealTimeVisitors] = useState("")
@@ -20,6 +22,10 @@ const ChartContainer = () => {
   const [TodayTotalVisitor, setTodayTotalVisitor] = useState("")
 
   const [ParkingLotInfo, setParkingLotInfo] = useState("")
+
+  const [realTime, setRealTime] = useState("none")
+
+  const [sevenDays, setSevenDays] = useState("block")
 
   //获取博物馆容量
   const handleMuseumCapacity = async () => {
@@ -69,6 +75,18 @@ const ChartContainer = () => {
 
   }
 
+  //展示实时流量界面
+  const handleRealTimePage = () => {
+    setRealTime("block");
+    setSevenDays("none")
+  }
+
+  //展示近7日流量页面
+  const handleSenvenDaysPage = () => {
+    setRealTime("none");
+    setSevenDays("block")
+  }
+
   //定时五秒执行
   useEffect(() => {
     handleMuseumCapacity();
@@ -88,7 +106,7 @@ const ChartContainer = () => {
     //   clearInterval(timer)
     // }
 
-  },[realTimeVisitors,museumCapacity,TodayTotalVisitor,ParkingLotInfo]);
+  }, [realTimeVisitors, museumCapacity, TodayTotalVisitor, ParkingLotInfo]);
 
   const theme = createTheme({
     palette: {
@@ -103,8 +121,6 @@ const ChartContainer = () => {
     },
 
   });
-
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -138,6 +154,7 @@ const ChartContainer = () => {
           <Grid container spacing={3}>
             {/* Chart */}
             <Grid item xs={12} md={6} lg={3}>
+            <IconButton onClick={handleRealTimePage} sx={{ p: 0 }}>
               <Paper
                 className='RealTimeVisitorPaper'
                 sx={{
@@ -175,9 +192,11 @@ const ChartContainer = () => {
                   </div>
                 </Stack>
               </Paper>
+              </IconButton>
             </Grid>
             {/* Chart */}
             <Grid item xs={12} md={6} lg={3}>
+            <IconButton onClick={handleSenvenDaysPage} sx={{ p: 0 }}>
               <Paper
                 className='RealTimeVisitorPaper'
                 sx={{
@@ -217,10 +236,11 @@ const ChartContainer = () => {
                   </div>
                 </Stack>
               </Paper>
+              </IconButton>
             </Grid>
             <Grid item xs={12} md={6} lg={3}>
               <Paper
-               className='RealTimeVisitorPaper'
+                className='RealTimeVisitorPaper'
                 sx={{
                   p: 2,
                   display: 'flex',
@@ -260,6 +280,7 @@ const ChartContainer = () => {
             <Grid item xs={9}>
               <Paper
                 sx={{
+                  marginLeft: "15px",
                   p: 2,
                   display: 'flex',
                   flexDirection: 'column',
@@ -270,7 +291,8 @@ const ChartContainer = () => {
                   borderRadius: "30px",
                   border: "3px solid rgba( 255, 255, 255, 0.18 )"
                 }}>
-                <TestChart />
+                <TestChart show={sevenDays} />
+                <MuseumRealTimeChart show={realTime} />
               </Paper>
             </Grid>
           </Grid>

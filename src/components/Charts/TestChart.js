@@ -1,7 +1,9 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable react/no-multi-comp */
+
 import React, { PureComponent } from 'react';
 import { reqSevenDaysData } from '../../api'
+import Stack from '@mui/material/Stack';
 import {
   LineChart,
   Line,
@@ -42,7 +44,7 @@ class CustomizedAxisTick extends PureComponent {
 
 export default class TestChart extends PureComponent {
   state = {
-    sevenDaysData:[]
+    sevenDaysData: []
   }
 
   //页面加载时,获取数据
@@ -61,27 +63,44 @@ export default class TestChart extends PureComponent {
 
   render() {
     return (
-      <LineChart
-        width={800}
-        height={600}
-        data={this.state.sevenDaysData}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 10
-        }}
+      <Stack
+        spacing={-3}
       >
-        <CartesianGrid strokeDasharray="3 3"/>
-        <XAxis stroke='BLACK' dataKey="date" height={60} tick={<CustomizedAxisTick />} />
-        <YAxis stroke='BLACK' />
-        <Tooltip />
+        <div style={{
+          display: this.props.show ,
+          fontFamily: 'Inter',
+          fontStyle: 'italic',
+          fontWeight: '400',
+          fontSize: '28px',
+          lineHeight: '34px',
+          color: '#000000',
+          marginRight: "200px"
+        }}>Seven Days Visitors</div>
+        <div>
+          <LineChart
+            style={{ display: this.props.show }}
+            width={800}
+            height={550}
+            data={this.state.sevenDaysData}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 10
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis stroke='BLACK' dataKey="date" height={60} tick={<CustomizedAxisTick />} />
+            <YAxis stroke='BLACK' />
+            <Tooltip />
 
-        <Legend />
-        <Line type="monotone" dataKey="visitorNumber" stroke="#8884d8" activeDot={{ r: 8 }}>
-          <LabelList content={<CustomizedLabel />} />
-        </Line>
-      </LineChart>
+            <Legend />
+            <Line type="monotone" dataKey="visitorNumber" stroke="#8884d8" activeDot={{ r: 8 }}>
+              <LabelList content={<CustomizedLabel />} />
+            </Line>
+          </LineChart>
+        </div>
+      </Stack>
     );
   }
 }

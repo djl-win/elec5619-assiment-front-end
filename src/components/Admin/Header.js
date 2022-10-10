@@ -9,14 +9,12 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import { storageUtils } from "../../utils/storageUtils"
-
+import {reqOpenMuseum, reqCloseMuseum} from "../../api"
+import { success,error,warn } from '../../utils/message';
 
 import InsightsIcon from '@mui/icons-material/Insights';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
-
-const settings = ['Profile', 'Logout'];
 
 const Header = () => {
 
@@ -29,6 +27,30 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  //开启博物馆
+  const handleOpenMuseum = async() => {
+    const response = await reqOpenMuseum();
+
+    if(response.code === 200){
+      success("🦄 The museum is now open!")
+    }else{
+      error("🦄 " + response.msg)
+    }
+    handleCloseUserMenu();
+  };
+
+    //关闭博物馆
+    const handleCloseMuseum = async() => {
+      const response = await reqCloseMuseum();
+  
+      if(response.code === 200){
+        warn("🦄 The museum will soon be closed!")
+      }else{
+        error("🦄 " + response.msg)
+      }
+      handleCloseUserMenu();
+    };
 
   const theme = createTheme({
     palette: {
@@ -95,11 +117,13 @@ const Header = () => {
               onClose={handleCloseUserMenu}
 
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+            
+                <MenuItem onClick={handleOpenMuseum}>
+                  <Typography textAlign="center">Open Museum</Typography>
                 </MenuItem>
-              ))}
+                <MenuItem onClick={handleCloseMuseum}>
+                  <Typography textAlign="center">Close Museum</Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

@@ -29,3 +29,9 @@ export const reqTodayTotalVisitor = () =>ajax(BASE + '/5619/visits/today/totalfl
 
 //查询停车场信息
 export const reqParkingLotInfo = () =>ajax(BASE + '/5619/parkinglots', null, 'GET')
+
+//开启博物馆
+export const reqOpenMuseum = () =>ajax(BASE + '/5619/schedulers/start', null, 'GET')
+
+//关闭博物馆
+export const reqCloseMuseum = () =>ajax(BASE + '/5619/schedulers/stop', null, 'GET')
