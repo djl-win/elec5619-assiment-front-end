@@ -8,6 +8,10 @@ import Venue1 from "../Venue1"
 import Venue2 from "../Venue2"
 import Venue3 from "../Venue3"
 import Portraits from "../Portraits"
+import History from "../History"
+import Comments from "../Comments"
+import Visitors from "../Visitors"
+import Setting from "../Setting"
 import { storageUtils } from "../../utils/storageUtils"
 import { error } from '../../utils/message.js'
 import Profile from "../Profile";
@@ -43,7 +47,11 @@ class Admin extends React.Component {
                     <Route path="/Venue1" component={Venue1} />
                     <Route path="/Venue2" component={Venue2} />
                     <Route path="/Venue3" component={Venue3} />
-                    <Route path="/Portraits" component={Portraits}/>
+                    <Route path="/Portraits" component={Portraits}/>\
+                    <Route path="/History" component={History}/>
+                    <Route path="/Comments" component={Comments}/>
+                    <Route path="/Visitors" component={Visitors}/>
+                    <Route path="/Setting" component={Setting}/>
                     <Redirect to="/Dashborad" />
                 </Switch>
             </div>
