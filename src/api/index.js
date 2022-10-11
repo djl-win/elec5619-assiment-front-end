@@ -47,3 +47,9 @@ export const reqVenueCapacity = (venueId) => ajax(BASE + '/5619/visits/capacity/
 
 //获取场馆当日总流量
 export const reqVenueTodayTotalVisitor = () =>ajax(BASE + '/5619/visits/today/eachvenuetotalflow', null, 'GET')
+
+//修改停车场容量
+export const reqModifyParkingLotCapacity = (capacity) => ajax(BASE + '/5619/parkinglots/modifyCapacity/' + capacity, null, 'PUT')
+
+//修改场馆1的容量
+export const reqModifyVenueCapacity = (venueId,venueCapacity) => ajax(BASE + '/5619/venues/modifyVenueCapacity', {venueId,venueCapacity}, 'PUT')
