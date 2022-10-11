@@ -10,11 +10,9 @@ class Dashboard extends React.Component {
     render() {
         return (
             <Fade in={true}>
-            <div className="admin_Dashboard">
-                
+                <div className="admin_Dashboard">
                     <ChartCon></ChartCon>
-                
-            </div>
+                </div>
             </Fade>
         )
     }
