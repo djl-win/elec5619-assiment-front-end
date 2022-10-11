@@ -51,7 +51,7 @@ const Header = () => {
       }
       handleCloseUserMenu();
     };
-
+    //define the theme
   const theme = createTheme({
     palette: {
       primary: {
@@ -73,7 +73,7 @@ const Header = () => {
           pr: '30px',
         }}
         >
-
+          {/* logo in the top left of the header */}
           <Typography component="h1"
             variant="h6"
             color="inherit"
@@ -82,7 +82,6 @@ const Header = () => {
           >
             Visit<InsightsIcon />Sight
           </Typography>
-
 
           <Box sx={{ flexGrow: 0 , display: "flex"}}>
             <Tooltip title="Open settings">
@@ -99,7 +98,8 @@ const Header = () => {
                   paddingTop:"3px" ,
                   fontSize: "20px"
                 }}>{storageUtils.getUser().peopleName}</div>
-                
+            
+            {/* pop up menu in the header to open and close the museum*/}
             <Menu
               sx={{ mt: '50px' }}
               id="menu-appbar"
@@ -116,8 +116,7 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
 
-            >
-            
+            >        
                 <MenuItem onClick={handleOpenMuseum}>
                   <Typography textAlign="center">Open Museum</Typography>
                 </MenuItem>

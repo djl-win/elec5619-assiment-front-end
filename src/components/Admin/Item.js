@@ -4,7 +4,7 @@ import './Item.css'
 import { Link } from 'react-router-dom'
 
 function Item({ icon, name, address }) {
-
+    //hide icon name while close the side bar
     const subheading = {
         true: {
             opacity: 1
@@ -16,6 +16,7 @@ function Item({ icon, name, address }) {
     }
     return (
         <Link to={address} style={{ textDecoration: 'none' }}>
+            {/* change the style para while hover*/}
             <motion.div className='item'
                 whileHover={{
                     backgroundColor: "rgba(72, 128, 255, 1)",

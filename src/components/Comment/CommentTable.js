@@ -4,6 +4,7 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
 import { GlobalStyles } from '@mui/material';
 
+//the table is fake data generator from mui, for display only, delate once the real data in
 const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
 
 const CommentTable = () => {
@@ -13,7 +14,7 @@ const CommentTable = () => {
     rowLength: 100,
   });
 
-  // Otherwise filter will be applied on fields such as the hidden column id
+  // make filter visible
   const columns = React.useMemo(
     () => data.columns.filter((column) => VISIBLE_FIELDS.includes(column.field)),
     [data.columns],

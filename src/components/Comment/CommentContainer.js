@@ -10,16 +10,12 @@ import Typography from '@mui/material/Typography';
 
 
 const CommentContainer = () => {
-
+  //define the theme
   const theme = createTheme({
     palette: {
       primary: {
         main: "#FFFFFF",
         contrastText: "000000"
-      },
-      secondary: {
-        main: "#448aff",
-        contrastText: "#FFFFFF",
       },
     },
     
@@ -38,6 +34,7 @@ const CommentContainer = () => {
         >
           <Toolbar />
           <Container maxWidth="xl" sx={{ mt: 6, mb: 6 }}>
+            {/* Grid - Box as container for page name */}
             <Grid item xs={12}>
               <Box  sx={{ display: 'flex', alignItems: 'end'}}>
                 <Typography
@@ -55,6 +52,7 @@ const CommentContainer = () => {
                 </Typography>
               </Box>          
             </Grid>
+            {/* Grid - Box as container for comment table */}
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12}>
