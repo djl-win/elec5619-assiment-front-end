@@ -1,5 +1,5 @@
 import React from "react";
-import VenueContainer1 from "../../components/VenueContainer/VenueContainer1";
+import VenueContainer1 from "../../components/Venue/VenueContainer1";
 import Fade from '@mui/material/Fade';
 import "./index.css"
 

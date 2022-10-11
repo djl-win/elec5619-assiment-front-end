@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import TestChart from "../Charts/TestChart";
 import Typography from '@mui/material/Typography';
+import VisitorTable from "./VisitorTable";
 
 
 
@@ -47,7 +47,8 @@ const VisitorsContainer = () => {
                   sx={{
                     fontWeight: "bold",
                     fontFamily: "Nunito Sans",
-                    marginBottom: "5px"
+                    marginBottom: "5px",
+                    marginLeft: "30px",
                   }}
                   >
                   Visitors
@@ -62,14 +63,15 @@ const VisitorsContainer = () => {
                   p: 2,
                   display: 'flex',
                   flexDirection: 'column',
-                  height: "580px",
-                  weight: "1070px",
+                  height: "1000px",
+                  weight: "1500px",
+                  width: "1500px",
                   boxShadow: "0 8px 32px 0 rgba(202, 202, 202, 0.37)",
                   backdropFilter: "blur(5.5px)",
                   borderRadius: "30px",
                   border: "3px solid rgba( 255, 255, 255, 0.18 )"
                 }}>
-                  
+                  <VisitorTable/>
                 </Paper>
               </Grid>
             </Grid>

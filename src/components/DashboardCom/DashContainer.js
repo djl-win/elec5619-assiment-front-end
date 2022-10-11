@@ -153,7 +153,7 @@ const ChartContainer = () => {
                 sx={{
                   fontWeight: "bold",
                   fontFamily: "Nunito Sans",
-                  marginBottom: "5px"
+                  marginBottom: "5px",
                 }}
               >
                 Museum
