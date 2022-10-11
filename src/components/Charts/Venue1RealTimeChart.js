@@ -73,7 +73,7 @@ const Venue1RealTimeChart = ({ show }) => {
             // 注:在setCount中使用箭头函数是最好方式之一,只有一个timer生成
             handleRealTimeVisitor();
 
-        }, 2000)
+        }, 4000)
         return () => {
             clearInterval(timer)
         }

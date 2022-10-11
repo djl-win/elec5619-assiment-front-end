@@ -11,7 +11,7 @@ import "../DashboardCom/DashContainer.css"
 import {reqModifyVenueCapacity, reqVenueCapacity, reqRealTimeCapacityVenue, reqVenueTodayTotalVisitor, reqVenueSevenDaysData } from '../../api'
 import { useState, useEffect } from 'react';
 import { error, success } from '../../utils/message.js'
-import Venue1RealTimeChart from '../Charts/Venue1RealTimeChart';
+import Venue3RealTimeChart from '../Charts/Venue3RealTimeChart';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -22,7 +22,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-const VenueContainer1 = () => {
+const VenueContainer3 = () => {
   const [realTimeVisitors, setRealTimeVisitors] = useState("")
 
   const [museumCapacity, setMuseumCapacity] = useState("")
@@ -47,7 +47,7 @@ const VenueContainer1 = () => {
   //提交修改容量表单
   const submitCapacityModificaiton = async() =>{
 
-    const venueId = 1;
+    const venueId = 3;
 
     const response = await reqModifyVenueCapacity(venueId,venueCapacity);
 
@@ -74,7 +74,7 @@ const VenueContainer1 = () => {
 
   //获取博物馆容量
   const handleMuseumCapacity = async () => {
-    const venueId = 1;
+    const venueId = 3;
     const response = await reqVenueCapacity(venueId);
 
     if (response.code === 200) {
@@ -92,7 +92,7 @@ const VenueContainer1 = () => {
       if (response.data.length === 0) {
         setRealTimeVisitors(0);
       } else {
-        setRealTimeVisitors(response.data[0].visitorNumber);
+        setRealTimeVisitors(response.data[2].visitorNumber);
       }
     } else {
       error("🦄 " + response.msg);
@@ -108,7 +108,7 @@ const VenueContainer1 = () => {
       if (response.data.length === 0) {
         setTodayTotalVisitor(0);
       } else {
-        setTodayTotalVisitor(response.data[0].visitorNumber);
+        setTodayTotalVisitor(response.data[2].visitorNumber);
       }
     } else {
       error("🦄 " + response.msg);
@@ -130,7 +130,7 @@ const VenueContainer1 = () => {
 
   //获取7日内数据
   const handleSevenDaysData = async () => {
-    const venueId = 1;
+    const venueId = 3;
     const response = await reqVenueSevenDaysData(venueId);
     if (response.code === 200) {
       setSevenDaysData(response.data);
@@ -203,7 +203,7 @@ const VenueContainer1 = () => {
                     marginBottom: "5px"
                   }}
                 >
-                  Venue 1
+                  Venue 3
                 </Typography>
               </Box>
             </Grid>
@@ -236,7 +236,7 @@ const VenueContainer1 = () => {
 
                         <div className='RealTimeVisitorPaperThree'><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z" fill="#00B69B" />
-                        </svg><div className='greenFont'>{'\u00A0'}5.6%{'\u00A0'}</div> Up from last hour</div>
+                        </svg><div className='greenFont'>{'\u00A0'}3.8%{'\u00A0'}</div> Up from last hour</div>
                       </div>
                       <div className='RealTimeVisitorPaperLeft'>
                         <svg
@@ -280,7 +280,7 @@ const VenueContainer1 = () => {
                           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16 18L18.29 15.71L13.41 10.83L9.41 14.83L2 7.41L3.41 6L9.41 12L13.41 8L19.71 14.29L22 12V18H16Z" fill="#F93C65" />
                           </svg>
-                          <div className='RedFont'>{'\u00A0'}5.3%{'\u00A0'}</div> Down from yesterday</div>
+                          <div className='RedFont'>{'\u00A0'}2.4%{'\u00A0'}</div> Down from yesterday</div>
                       </div>
                       <div className='RealTimeVisitorPaperLeft'>
                         <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -362,7 +362,7 @@ const VenueContainer1 = () => {
                     border: "3px solid rgba( 255, 255, 255, 0.18 )"
                   }}>
                   <TestChart show={sevenDays} chartData={sevenDaysData} />
-                  <Venue1RealTimeChart show={realTime} />
+                  <Venue3RealTimeChart show={realTime} />
                 </Paper>
               </Grid>
             </Grid>
@@ -382,10 +382,10 @@ const VenueContainer1 = () => {
             fontSize: "25px",
             fontWeight: "bold"
           }}
-        >Venue 1 Capacity</DialogTitle>
+        >Venue 3 Capacity</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please enter number of people allow in Venue 1
+            Please enter number of people allow in Venue 3
           </DialogContentText>
           <TextField
             autoFocus
@@ -410,4 +410,4 @@ const VenueContainer1 = () => {
   );
 }
 
-export default VenueContainer1
+export default VenueContainer3

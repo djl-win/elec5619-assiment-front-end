@@ -1,9 +1,9 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable react/no-multi-comp */
 import React, { PureComponent, useEffect, useState } from 'react';
-import { reqRealTimeCapacity } from '../../api';
-import { error } from '../../utils/message.js'
+import { reqRealTimeCapacityVenue } from '../../api';
 import Stack from '@mui/material/Stack';
+import { error } from '../../utils/message.js'
 import {
     LineChart,
     Line,
@@ -43,7 +43,7 @@ class CustomizedAxisTick extends PureComponent {
         );
     }
 }
-const MuseumRealTimeChart = ({ show }) => {
+const Venue3RealTimeChart = ({ show }) => {
 
     const [realTimeVisitor, setRealTimeVisitor] = useState([{
         date: "00:00:00",
@@ -73,7 +73,7 @@ const MuseumRealTimeChart = ({ show }) => {
             // 注:在setCount中使用箭头函数是最好方式之一,只有一个timer生成
             handleRealTimeVisitor();
 
-        }, 2500)
+        }, 4000)
         return () => {
             clearInterval(timer)
         }
@@ -84,7 +84,7 @@ const MuseumRealTimeChart = ({ show }) => {
     const handleRealTimeVisitor = async () => {
         const temp = realTimeVisitor;
 
-        const response = await reqRealTimeCapacity();
+        const response = await reqRealTimeCapacityVenue();
 
         var date = new Date();
 
@@ -102,17 +102,25 @@ const MuseumRealTimeChart = ({ show }) => {
         if (seconds >= 0 && seconds <= 9) {
             seconds = "0" + seconds;
         }
-
         if (response.code === 200) {
-            const tempSec = {
-                date: hours + ":" + minutes + ":" + seconds,
-                visitorNumbers: response.data
-            };
-            temp.shift();
-            temp.push(tempSec)
-            setRealTimeVisitor(temp)
-
-        } else {
+            if (response.data.length === 0) {
+                const tempSec = {
+                    date: hours + ":" + minutes + ":" + seconds,
+                    visitorNumbers: 0
+                };
+                temp.shift();
+                temp.push(tempSec);
+                setRealTimeVisitor(temp);
+            } else {
+                const tempSec = {
+                    date: hours + ":" + minutes + ":" + seconds,
+                    visitorNumbers: response.data[2].visitorNumber
+                };
+                temp.shift();
+                temp.push(tempSec)
+                setRealTimeVisitor(temp)
+            }
+        }else {
             error("🦄 " + response.msg);
         }
 
@@ -161,4 +169,4 @@ const MuseumRealTimeChart = ({ show }) => {
     );
 
 }
-export default MuseumRealTimeChart;
+export default Venue3RealTimeChart;
