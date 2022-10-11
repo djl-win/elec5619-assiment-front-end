@@ -8,7 +8,7 @@ import TestChart from "../Charts/TestChart";
 import Typography from '@mui/material/Typography';
 import "./DashContainer.css";
 import Stack from '@mui/material/Stack';
-import { reqMuseumCapacity, reqRealTimeCapacity, reqTodayTotalVisitor, reqParkingLotInfo } from '../../api'
+import { reqMuseumCapacity, reqRealTimeCapacity, reqTodayTotalVisitor, reqParkingLotInfo, reqSevenDaysData } from '../../api'
 import { useState, useEffect } from 'react';
 import { error } from '../../utils/message.js'
 import MuseumRealTimeChart from '../Charts/MuseumRealTimeChart';
@@ -26,6 +26,18 @@ const ChartContainer = () => {
   const [realTime, setRealTime] = useState("none")
 
   const [sevenDays, setSevenDays] = useState("block")
+
+  const [sevenDaysData, setSevenDaysData] = useState([])
+
+  //获取7日内数据
+  const handleSevenDaysData = async () => {
+    const response = await reqSevenDaysData();
+    if (response.code === 200) {
+      setSevenDaysData(response.data);
+    } else {
+      error("🦄 " + response.msg);
+    }
+  }
 
   //获取博物馆容量
   const handleMuseumCapacity = async () => {
@@ -89,24 +101,21 @@ const ChartContainer = () => {
 
   //定时五秒执行
   useEffect(() => {
-    handleMuseumCapacity();
-    handleRealTimeCapacity();
-    handleTodayTotalVisitor();
-    handleParkingLotInfo();
 
-    // const timer = setInterval(() => {
-    //   // 注:在setCount中使用箭头函数是最好方式之一,只有一个timer生成
-    //   handleMuseumCapacity();
-    //   handleRealTimeCapacity();
-    //   handleTodayTotalVisitor();
-    //   handleParkingLotInfo();
+    const timer = setInterval(() => {
+      // 注:在setCount中使用箭头函数是最好方式之一,只有一个timer生成
+      handleMuseumCapacity();
+      handleRealTimeCapacity();
+      handleTodayTotalVisitor();
+      handleParkingLotInfo();
+      handleSevenDaysData();
 
-    // }, 5000)
-    // return () => {
-    //   clearInterval(timer)
-    // }
+    }, 4000)
+    return () => {
+      clearInterval(timer)
+    }
 
-  }, [realTimeVisitors, museumCapacity, TodayTotalVisitor, ParkingLotInfo]);
+  });
 
   const theme = createTheme({
     palette: {
@@ -154,88 +163,88 @@ const ChartContainer = () => {
           <Grid container spacing={3}>
             {/* Chart */}
             <Grid item xs={12} md={6} lg={3}>
-            <IconButton onClick={handleRealTimePage} sx={{ p: 0 }}>
-              <Paper
-                className='RealTimeVisitorPaper'
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: "158px",
-                  weight: "333px",
-                  boxShadow: "2px 2px 2px 2px rgba(0, 0, 0, 0.1),0 8px 32px 0 rgba(202, 202, 202, 0.37)",
-                  backdropFilter: "blur(5.5px)",
-                  borderRadius: "30px",
-                  border: "3px solid rgba( 255, 255, 255, 0.18 )"
-                }}
-              >
-                <Stack
-                  direction="row"
-                  spacing={2}
+              <IconButton onClick={handleRealTimePage} sx={{ p: 0 }}>
+                <Paper
+                  className='RealTimeVisitorPaper'
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: "158px",
+                    weight: "333px",
+                    boxShadow: "2px 2px 2px 2px rgba(0, 0, 0, 0.1),0 8px 32px 0 rgba(202, 202, 202, 0.37)",
+                    backdropFilter: "blur(5.5px)",
+                    borderRadius: "30px",
+                    border: "3px solid rgba( 255, 255, 255, 0.18 )"
+                  }}
                 >
-                  <div className='RealTimeVisitorPaperLeft'>
-                    <div className='RealTimeVisitorPaperOne'>Real Time Visitor</div>
+                  <Stack
+                    direction="row"
+                    spacing={2}
+                  >
+                    <div className='RealTimeVisitorPaperLeft'>
+                      <div className='RealTimeVisitorPaperOne'>Real Time Visitor</div>
 
-                    <div className='RealTimeVisitorPaperTwo'>{realTimeVisitors}/{museumCapacity}</div>
+                      <div className='RealTimeVisitorPaperTwo'>{realTimeVisitors}/{museumCapacity}</div>
 
-                    <div className='RealTimeVisitorPaperThree'><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z" fill="#00B69B" />
-                    </svg><div className='greenFont'>{'\u00A0'}8.5%{'\u00A0'}</div> Up from last hour</div>
-                  </div>
-                  <div className='RealTimeVisitorPaperLeft'>
-                    <svg
-                      width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path opacity="0.21" fillRule="evenodd" clipRule="evenodd" d="M0 30V37C0 49.7025 10.2975 60 23 60H30H37C49.7025 60 60 49.7025 60 37V30V23C60 10.2975 49.7025 0 37 0H30H23C10.2975 0 0 10.2975 0 23V30Z" fill="#8280FF" />
-                      <path opacity="0.587821" fillRule="evenodd" clipRule="evenodd" d="M20.6667 23.3333C20.6667 26.2789 23.0545 28.6667 26 28.6667C28.9455 28.6667 31.3333 26.2789 31.3333 23.3333C31.3333 20.3878 28.9455 18 26 18C23.0545 18 20.6667 20.3878 20.6667 23.3333ZM34 28.6667C34 30.8758 35.7909 32.6667 38 32.6667C40.2091 32.6667 42 30.8758 42 28.6667C42 26.4575 40.2091 24.6667 38 24.6667C35.7909 24.6667 34 26.4575 34 28.6667Z" fill="#8280FF" />
-                      <path fillRule="evenodd" clipRule="evenodd" d="M25.9778 31.3333C19.6826 31.3333 14.5177 34.5687 14.0009 40.9323C13.9727 41.2789 14.6356 42 14.97 42H36.9956C37.9972 42 38.0128 41.194 37.9972 40.9333C37.6065 34.3909 32.3616 31.3333 25.9778 31.3333ZM45.2746 42L40.1333 42C40.1333 38.9988 39.1417 36.2291 37.4683 34.0008C42.0103 34.0505 45.7189 36.3469 45.998 41.2C46.0092 41.3955 45.998 42 45.2746 42Z" fill="#8280FF" />
-                    </svg>
-                  </div>
-                </Stack>
-              </Paper>
+                      <div className='RealTimeVisitorPaperThree'><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z" fill="#00B69B" />
+                      </svg><div className='greenFont'>{'\u00A0'}8.5%{'\u00A0'}</div> Up from last hour</div>
+                    </div>
+                    <div className='RealTimeVisitorPaperLeft'>
+                      <svg
+                        width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.21" fillRule="evenodd" clipRule="evenodd" d="M0 30V37C0 49.7025 10.2975 60 23 60H30H37C49.7025 60 60 49.7025 60 37V30V23C60 10.2975 49.7025 0 37 0H30H23C10.2975 0 0 10.2975 0 23V30Z" fill="#8280FF" />
+                        <path opacity="0.587821" fillRule="evenodd" clipRule="evenodd" d="M20.6667 23.3333C20.6667 26.2789 23.0545 28.6667 26 28.6667C28.9455 28.6667 31.3333 26.2789 31.3333 23.3333C31.3333 20.3878 28.9455 18 26 18C23.0545 18 20.6667 20.3878 20.6667 23.3333ZM34 28.6667C34 30.8758 35.7909 32.6667 38 32.6667C40.2091 32.6667 42 30.8758 42 28.6667C42 26.4575 40.2091 24.6667 38 24.6667C35.7909 24.6667 34 26.4575 34 28.6667Z" fill="#8280FF" />
+                        <path fillRule="evenodd" clipRule="evenodd" d="M25.9778 31.3333C19.6826 31.3333 14.5177 34.5687 14.0009 40.9323C13.9727 41.2789 14.6356 42 14.97 42H36.9956C37.9972 42 38.0128 41.194 37.9972 40.9333C37.6065 34.3909 32.3616 31.3333 25.9778 31.3333ZM45.2746 42L40.1333 42C40.1333 38.9988 39.1417 36.2291 37.4683 34.0008C42.0103 34.0505 45.7189 36.3469 45.998 41.2C46.0092 41.3955 45.998 42 45.2746 42Z" fill="#8280FF" />
+                      </svg>
+                    </div>
+                  </Stack>
+                </Paper>
               </IconButton>
             </Grid>
             {/* Chart */}
             <Grid item xs={12} md={6} lg={3}>
-            <IconButton onClick={handleSenvenDaysPage} sx={{ p: 0 }}>
-              <Paper
-                className='RealTimeVisitorPaper'
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  height: "158px",
-                  weight: "333px",
-                  boxShadow: "2px 2px 2px 2px rgba(0, 0, 0, 0.1),0 8px 32px 0 rgba(202, 202, 202, 0.37)",
-                  backdropFilter: "blur(5.5px)",
-                  borderRadius: "30px",
-                  border: "3px solid rgba( 255, 255, 255, 0.18 )"
-                }}
-              >
-                <Stack
-                  direction="row"
-                  spacing={2}
+              <IconButton onClick={handleSenvenDaysPage} sx={{ p: 0 }}>
+                <Paper
+                  className='RealTimeVisitorPaper'
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: "158px",
+                    weight: "333px",
+                    boxShadow: "2px 2px 2px 2px rgba(0, 0, 0, 0.1),0 8px 32px 0 rgba(202, 202, 202, 0.37)",
+                    backdropFilter: "blur(5.5px)",
+                    borderRadius: "30px",
+                    border: "3px solid rgba( 255, 255, 255, 0.18 )"
+                  }}
                 >
-                  <div className='RealTimeVisitorPaperLeft'>
-                    <div className='RealTimeVisitorPaperOne'>Total Visitor--Today</div>
+                  <Stack
+                    direction="row"
+                    spacing={2}
+                  >
+                    <div className='RealTimeVisitorPaperLeft'>
+                      <div className='RealTimeVisitorPaperOne'>Total Visitor--Today</div>
 
-                    <div className='TotalVisitorPaperTwo'>{TodayTotalVisitor}</div>
+                      <div className='TotalVisitorPaperTwo'>{TodayTotalVisitor}</div>
 
-                    <div className='RealTimeVisitorPaperThree'>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 18L18.29 15.71L13.41 10.83L9.41 14.83L2 7.41L3.41 6L9.41 12L13.41 8L19.71 14.29L22 12V18H16Z" fill="#F93C65" />
+                      <div className='RealTimeVisitorPaperThree'>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M16 18L18.29 15.71L13.41 10.83L9.41 14.83L2 7.41L3.41 6L9.41 12L13.41 8L19.71 14.29L22 12V18H16Z" fill="#F93C65" />
+                        </svg>
+                        <div className='RedFont'>{'\u00A0'}4.3%{'\u00A0'}</div> Down from yesterday</div>
+                    </div>
+                    <div className='RealTimeVisitorPaperLeft'>
+                      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path opacity="0.21" fillRule="evenodd" clipRule="evenodd" d="M0 30V37C0 49.7025 10.2975 60 23 60H30H37C49.7025 60 60 49.7025 60 37V30V23C60 10.2975 49.7025 0 37 0H30H23C10.2975 0 0 10.2975 0 23V30Z" fill="#4AD991" />
+                        <path d="M19.1111 40.8889H42.4444C43.3036 40.8889 44 41.5853 44 42.4444C44 43.3036 43.3036 44 42.4444 44H17.5556C16.6964 44 16 43.3036 16 42.4444V17.5556C16 16.6964 16.6964 16 17.5556 16C18.4147 16 19.1111 16.6964 19.1111 17.5556V40.8889Z" fill="#4AD991" />
+                        <path opacity="0.5" d="M24.9126 34.175C24.325 34.8018 23.3406 34.8335 22.7139 34.2459C22.0871 33.6584 22.0554 32.6739 22.643 32.0472L28.4763 25.825C29.0445 25.2188 29.9888 25.1663 30.6209 25.7056L35.2249 29.6344L41.2235 22.0361C41.7559 21.3618 42.734 21.2467 43.4083 21.7791C44.0826 22.3114 44.1977 23.2896 43.6654 23.9639L36.6654 32.8305C36.1186 33.5231 35.1059 33.6227 34.4347 33.0499L29.7306 29.0358L24.9126 34.175Z" fill="#4AD991" />
                       </svg>
-                      <div className='RedFont'>{'\u00A0'}4.3%{'\u00A0'}</div> Down from yesterday</div>
-                  </div>
-                  <div className='RealTimeVisitorPaperLeft'>
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path opacity="0.21" fillRule="evenodd" clipRule="evenodd" d="M0 30V37C0 49.7025 10.2975 60 23 60H30H37C49.7025 60 60 49.7025 60 37V30V23C60 10.2975 49.7025 0 37 0H30H23C10.2975 0 0 10.2975 0 23V30Z" fill="#4AD991" />
-                      <path d="M19.1111 40.8889H42.4444C43.3036 40.8889 44 41.5853 44 42.4444C44 43.3036 43.3036 44 42.4444 44H17.5556C16.6964 44 16 43.3036 16 42.4444V17.5556C16 16.6964 16.6964 16 17.5556 16C18.4147 16 19.1111 16.6964 19.1111 17.5556V40.8889Z" fill="#4AD991" />
-                      <path opacity="0.5" d="M24.9126 34.175C24.325 34.8018 23.3406 34.8335 22.7139 34.2459C22.0871 33.6584 22.0554 32.6739 22.643 32.0472L28.4763 25.825C29.0445 25.2188 29.9888 25.1663 30.6209 25.7056L35.2249 29.6344L41.2235 22.0361C41.7559 21.3618 42.734 21.2467 43.4083 21.7791C44.0826 22.3114 44.1977 23.2896 43.6654 23.9639L36.6654 32.8305C36.1186 33.5231 35.1059 33.6227 34.4347 33.0499L29.7306 29.0358L24.9126 34.175Z" fill="#4AD991" />
-                    </svg>
 
-                  </div>
-                </Stack>
-              </Paper>
+                    </div>
+                  </Stack>
+                </Paper>
               </IconButton>
             </Grid>
             <Grid item xs={12} md={6} lg={3}>
@@ -291,7 +300,7 @@ const ChartContainer = () => {
                   borderRadius: "30px",
                   border: "3px solid rgba( 255, 255, 255, 0.18 )"
                 }}>
-                <TestChart show={sevenDays} />
+                <TestChart show={sevenDays} chartData={sevenDaysData} />
                 <MuseumRealTimeChart show={realTime} />
               </Paper>
             </Grid>

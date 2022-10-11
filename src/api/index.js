@@ -35,3 +35,15 @@ export const reqOpenMuseum = () =>ajax(BASE + '/5619/schedulers/start', null, 'G
 
 //关闭博物馆
 export const reqCloseMuseum = () =>ajax(BASE + '/5619/schedulers/stop', null, 'GET')
+
+//获取分场馆七日内浏览记录
+export const reqVenueSevenDaysData = (venueId) => ajax(BASE + '/5619/visits/sevendays/venue/'+ venueId, null, 'GET')
+
+//查询分场馆实时客流量
+export const reqRealTimeCapacityVenue= () =>ajax(BASE + '/5619/visits/today/eachvenuerealtimeflow', null, 'GET')
+
+//获取分场馆容量
+export const reqVenueCapacity = (venueId) => ajax(BASE + '/5619/visits/capacity/'+ venueId, null, 'GET')
+
+//获取场馆当日总流量
+export const reqVenueTodayTotalVisitor = () =>ajax(BASE + '/5619/visits/today/eachvenuetotalflow', null, 'GET')

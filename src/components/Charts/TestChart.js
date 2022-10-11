@@ -2,7 +2,6 @@
 /* eslint-disable react/no-multi-comp */
 
 import React, { PureComponent } from 'react';
-import { reqSevenDaysData } from '../../api'
 import Stack from '@mui/material/Stack';
 import {
   LineChart,
@@ -42,32 +41,13 @@ class CustomizedAxisTick extends PureComponent {
   }
 }
 
-export default class TestChart extends PureComponent {
-  state = {
-    sevenDaysData: []
-  }
-
-  //页面加载时,获取数据
-  componentDidMount() {
-    this.handleSevenDaysData();
-  }
-
-  //获取7日内的数据
-  handleSevenDaysData = async () => {
-    const response = await reqSevenDaysData();
-    this.setState({
-      sevenDaysData: response.data
-    })
-    console.log(response.data)
-  }
-
-  render() {
+const TestChart = ({ show,chartData }) => {
     return (
       <Stack
         spacing={-3}
       >
         <div style={{
-          display: this.props.show ,
+          display: show ,
           fontFamily: 'Inter',
           fontStyle: 'italic',
           fontWeight: '400',
@@ -78,10 +58,10 @@ export default class TestChart extends PureComponent {
         }}>Seven Days Visitors</div>
         <div>
           <LineChart
-            style={{ display: this.props.show }}
+            style={{ display: show }}
             width={800}
             height={550}
-            data={this.state.sevenDaysData}
+            data={chartData}
             margin={{
               top: 20,
               right: 30,
@@ -102,5 +82,5 @@ export default class TestChart extends PureComponent {
         </div>
       </Stack>
     );
-  }
 }
+export default TestChart;

@@ -5,7 +5,7 @@
 
 .RealTimeVisitorPaperOne {
 
-    margin-left: -80px;
+    margin-right: 80px;
     font-weight: 600;
     font-size: 16px;
     line-height: 22px;
@@ -35,9 +35,10 @@
 }
 
 .RealTimeVisitorPaperThree{
-    
+
+    color: #606060;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 15px;
     letter-spacing: 1px;
     display: flex;
     margin-top: 10px;

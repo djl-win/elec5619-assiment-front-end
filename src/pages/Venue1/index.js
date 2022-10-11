@@ -1,12 +1,16 @@
 import React from "react";
-import ChartCon from "../../components/VenueContainer/VenueContainer";
+import VenueContainer1 from "../../components/VenueContainer/VenueContainer1";
+import Fade from '@mui/material/Fade';
+import "./index.css"
 
 class Venue1 extends React.Component {
     render() {
         return (
+            <Fade in={true}>
             <div className="admin_Venue1">
-                <ChartCon></ChartCon> 
+                <VenueContainer1></VenueContainer1> 
             </div>
+            </Fade>
         )
     }
 };
