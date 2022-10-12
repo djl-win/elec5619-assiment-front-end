@@ -56,3 +56,12 @@ export const reqModifyVenueCapacity = (venueId,venueCapacity) => ajax(BASE + '/5
 
 //update profile, probably separte as pass and profile later
 export const reqUpdateProfile = (AdminPeopleId, adminUsername, peopleEmail, peoplePhone, adminPassword) => ajax(BASE + '/5619/admins/update', {AdminPeopleId, adminUsername, peopleEmail, peoplePhone, adminPassword}, 'POST')
+
+//查询7日内的访客性别比例
+export const reqSevenDaysGender=() =>ajax(BASE + '/5619/people/genderPortrait/sevendays',null,'GET')
+
+//查询全部访客的性别分布
+export const reqAllGender=() =>ajax(BASE + '/5619/people/genderPortrait/all',null,'GET')
+
+//查询全部访客的年龄分布
+export const reqAgeGroup=() =>ajax(BASE + '/5619/people/agePortrait',null,'GET')
