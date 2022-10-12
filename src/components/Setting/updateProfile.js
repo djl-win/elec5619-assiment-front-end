@@ -1,21 +1,72 @@
 import { useState } from 'react';
 import { Box, Button, Card, CardContent, CardHeader, Divider, TextField } from '@mui/material';
+import { success, error, warn } from '../../utils/message.js'
+import { reqUpdateProfile } from '../../api'
 
-const updateProfile = (props) => {
-  /*const [values, setValues] = useState({
+const UpdateProfile = (props) => {
+
+  const initialFormState = {
+    username: '',
+    email: '',
+    phone: '',
     password: '',
     confirm: ''
-  });
+  };
+
+  const [values, setValues] = useState(initialFormState);
 
   const handleChange = (event) => {
     setValues({
       ...values,
       [event.target.name]: event.target.value
     });
-  };*/
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const adminUsername = values.username;
+    const peopleEmail = values.email;
+    const peoplePhone = values.phone;
+    const adminPassword = values.password;
+    const userConfirm = values.confirm;
+
+    if (adminUsername === null || adminUsername === '') {
+      warn("🦄 Please enter username!")
+      return;
+    } else if (peopleEmail === null || peopleEmail === '') {
+      warn("🦄 Please enter email!")
+      return;
+    } else if (peoplePhone === null || peoplePhone === '') {
+      warn("🦄 Please enter phone!")
+      return;
+    } else if (adminPassword === null || adminPassword === '') {
+      warn("🦄 Please enter new password!")
+      return;
+    } else if (userConfirm === null || userConfirm === '') {
+      warn("🦄 Please enter confirm password!")
+      return;
+    } else if (userConfirm !== adminPassword) {
+      warn("🦄 Should be same as the password")
+      return;
+    } 
+
+    const response = await reqUpdateProfile(adminUsername, peopleEmail, peoplePhone, adminPassword);
+
+    if (response.code === 200) {
+      success("🦄 " + response.data)
+      setValues(initialFormState);
+    } else {
+      error("🦄 " + response.msg)
+    }
+
+
+  }
+
+
 
   return (
-    <form {...props}>
+    <form {...props} onSubmit={handleSubmit}>
       <Card>
         <CardHeader
           title="Update Profile"
@@ -27,9 +78,9 @@ const updateProfile = (props) => {
                 label="Username"
                 margin="normal"
                 name="username"
-                //onChange={handleChange}
+                onChange={handleChange}
                 type="text"
-                //value={values.password}
+                value={values.username}
                 variant="outlined"
             />
             <TextField
@@ -37,9 +88,9 @@ const updateProfile = (props) => {
                 label="Email"
                 margin="normal"
                 name="email"
-                //onChange={handleChange}
+                onChange={handleChange}
                 type="text"
-                //value={values.password}
+                value={values.email}
                 variant="outlined"
             />
             <TextField
@@ -47,9 +98,9 @@ const updateProfile = (props) => {
                 label="Phone"
                 margin="normal"
                 name="phone"
-                //onChange={handleChange}
+                onChange={handleChange}
                 type="text"
-                //value={values.password}
+                value={values.phone}
                 variant="outlined"
             />
             <TextField
@@ -57,9 +108,9 @@ const updateProfile = (props) => {
                 label="Password"
                 margin="normal"
                 name="password"
-                //onChange={handleChange}
+                onChange={handleChange}
                 type="password"
-                //value={values.password}
+                value={values.password}
                 variant="outlined"
             />
             <TextField
@@ -67,9 +118,9 @@ const updateProfile = (props) => {
                 label="Confirm password"
                 margin="normal"
                 name="confirm"
-                //onChange={handleChange}
+                onChange={handleChange}
                 type="password"
-                //value={values.confirm}
+                value={values.confirm}
                 variant="outlined"
             />
         </CardContent>
@@ -84,6 +135,7 @@ const updateProfile = (props) => {
           <Button
             color="primary"
             variant="contained"
+            type="submit"
           >
             Update
           </Button>
@@ -93,4 +145,4 @@ const updateProfile = (props) => {
   );
 };
 
-export default updateProfile;
+export default UpdateProfile;
