@@ -10,7 +10,7 @@ const VisitorTable = () => {
 
     const { data } = useDemoData({
         dataSet: 'Commodity',
-        rowLength: 100,
+        rowLength: 10,
         maxColumns: 10,
     });
 

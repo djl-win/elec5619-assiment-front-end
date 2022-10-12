@@ -55,4 +55,4 @@ export const reqModifyParkingLotCapacity = (capacity) => ajax(BASE + '/5619/park
 export const reqModifyVenueCapacity = (venueId,venueCapacity) => ajax(BASE + '/5619/venues/modifyVenueCapacity', {venueId,venueCapacity}, 'PUT')
 
 //update profile, probably separte as pass and profile later
-export const reqUpdateProfile = (adminUsername, peopleEmail, peoplePhone, adminPassword) => ajax(BASE + '/5619/admins/update', {adminUsername, peopleEmail, peoplePhone, adminPassword}, 'POST')
+export const reqUpdateProfile = (AdminPeopleId, adminUsername, peopleEmail, peoplePhone, adminPassword) => ajax(BASE + '/5619/admins/update', {AdminPeopleId, adminUsername, peopleEmail, peoplePhone, adminPassword}, 'POST')

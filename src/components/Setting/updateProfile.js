@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { Box, Button, Card, CardContent, CardHeader, Divider, TextField } from '@mui/material';
 import { success, error, warn } from '../../utils/message.js'
 import { reqUpdateProfile } from '../../api'
+import { storageUtils } from "../../utils/storageUtils"
 
 const UpdateProfile = (props) => {
+
+  const peopleInfo = storageUtils.getUser();
 
   const initialFormState = {
     username: '',
@@ -30,6 +33,7 @@ const UpdateProfile = (props) => {
     const peoplePhone = values.phone;
     const adminPassword = values.password;
     const userConfirm = values.confirm;
+    const AdminPeopleId = peopleInfo.peopleId;
 
     if (adminUsername === null || adminUsername === '') {
       warn("🦄 Please enter username!")
@@ -47,11 +51,11 @@ const UpdateProfile = (props) => {
       warn("🦄 Please enter confirm password!")
       return;
     } else if (userConfirm !== adminPassword) {
-      warn("🦄 Should be same as the password")
+      warn("🦄 confirm password Should be same as the password")
       return;
     } 
-
-    const response = await reqUpdateProfile(adminUsername, peopleEmail, peoplePhone, adminPassword);
+    //console.log(AdminPeopleId + " " + adminUsername  + " " + peopleEmail + " " + peoplePhone);
+    const response = await reqUpdateProfile(AdminPeopleId,adminUsername, peopleEmail, peoplePhone, adminPassword);
 
     if (response.code === 200) {
       success("🦄 " + response.data)
