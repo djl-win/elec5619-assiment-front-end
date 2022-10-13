@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import "./CommentTable.css"
 
 function renderRating(params) {
+  console.log(params.value);
   return <Rating readOnly value={params.value} />;
 }
 
