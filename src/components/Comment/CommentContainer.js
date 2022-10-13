@@ -57,12 +57,13 @@ const CommentContainer = () => {
               {/* Chart */}
               <Grid item xs={12}>
                 <Paper sx={{
+                  marginTop: "50px",
                   marginLeft: "15px",
                   p: 2,
                   display: 'flex',
                   flexDirection: 'column',
-                  height: "1000px",
-                  width: "1500px",
+                  height: "600px",
+                  width: "1300px",
                   boxShadow: "0 8px 32px 0 rgba(202, 202, 202, 0.37)",
                   backdropFilter: "blur(5.5px)",
                   borderRadius: "30px",

@@ -1,36 +1,75 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
-import { GlobalStyles } from '@mui/material';
+import { reqComments } from '../../api';
+import { error } from "../../utils/message"
+import { useState, useEffect } from "react";
+import Rating from '@mui/material/Rating';
+import PropTypes from 'prop-types';
 
-//the table is fake data generator from mui, for display only, delate once the real data in
-const VISIBLE_FIELDS = ['name', 'rating', 'country', 'dateCreated', 'isAdmin'];
+import "./CommentTable.css"
+
+function renderRating(params) {
+  return <Rating readOnly value={params.value} />;
+}
+
+renderRating.propTypes = {
+  /**
+   * The cell value.
+   * If the column has `valueGetter`, use `params.row` to directly access the fields.
+   */
+  value: PropTypes.number,
+};
+
 
 const CommentTable = () => {
-  const { data } = useDemoData({
-    dataSet: 'Employee',
-    visibleFields: VISIBLE_FIELDS,
-    rowLength: 100,
-  });
+
+  const [comments, setComments] = useState([]);
+
+
+  useEffect(() => {
+    handleAllComments();
+
+  }, [])
+
+  const handleAllComments = async () => {
+    const response = await reqComments();
+    console.log(response.data)
+    if (response.code === 200) {
+      setComments(response.data)
+    }
+    else {
+      error(response.msg)
+    }
+  }
 
   // make filter visible
-  const columns = React.useMemo(
-    () => data.columns.filter((column) => VISIBLE_FIELDS.includes(column.field)),
-    [data.columns],
-  );
+  // const columns = React.useMemo(
+  //   () => data.columns.filter((column) => VISIBLE_FIELDS.includes(column.field)),
+  //   [data.columns],
+  // );
+  const columns = [
+    { field: 'commentId', headerName: 'ID' },
+    { field: 'peopleName', headerName: 'Name', width: 150 },
+    { field: 'commentRank', headerName: 'Rating', width: 200 ,
+    renderCell: renderRating},
+    { field: 'commentDate', headerName: 'Commented On', width: 200 },
+    { field: 'commentContent', headerName: 'Content', width: 580 }
+  ]
 
   return (
-    <Box sx={{ height: '100%', width: '100%' }}>
-      <GlobalStyles
-                styles={{
-                '.MuiDataGrid-toolbarContainer': {
-                    backgroundColor: '#448aff',
-                },
-                }}
-            />
+
+    <Box sx={{
+      height: '100%',
+      width: '100%',
+    }}>
+
       <DataGrid
-        {...data}
+        sx={{
+          border: "0px ",
+        }}
+        getRowId={comments => comments.commentId}
+        rows={comments}
         disableColumnFilter
         disableColumnSelector
         disableDensitySelector
@@ -44,6 +83,7 @@ const CommentTable = () => {
         }}
       />
     </Box>
+
   );
 }
 

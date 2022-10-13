@@ -1,6 +1,7 @@
 import React, { useState,useEffect  } from "react";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { reqAllGender } from "../../api";
+import {error} from "../../utils/message"
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -59,7 +60,7 @@ export default function PortraitGenderChartAll({show}) {
       setGenderData(tempSec);
     }
     else{
-
+      error(response.msg)
     }
   }
   return (

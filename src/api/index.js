@@ -65,3 +65,6 @@ export const reqAllGender=() =>ajax(BASE + '/5619/people/genderPortrait/all',nul
 
 //查询全部访客的年龄分布
 export const reqAgeGroup=() =>ajax(BASE + '/5619/people/agePortrait',null,'GET')
+
+//查询所有的评论信息
+export const reqComments = () =>ajax(BASE + '/5619/comments/allComments',null,'GET')
