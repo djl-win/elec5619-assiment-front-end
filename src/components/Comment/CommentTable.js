@@ -7,17 +7,13 @@ import { useState, useEffect } from "react";
 import Rating from '@mui/material/Rating';
 import PropTypes from 'prop-types';
 
-import "./CommentTable.css"
 
 function renderRating(params) {
   return <Rating readOnly value={params.value} />;
 }
 
 renderRating.propTypes = {
-  /**
-   * The cell value.
-   * If the column has `valueGetter`, use `params.row` to directly access the fields.
-   */
+
   value: PropTypes.number,
 };
 
@@ -34,7 +30,6 @@ const CommentTable = () => {
 
   const handleAllComments = async () => {
     const response = await reqComments();
-    console.log(response.data)
     if (response.code === 200) {
       setComments(response.data)
     }
@@ -43,11 +38,6 @@ const CommentTable = () => {
     }
   }
 
-  // make filter visible
-  // const columns = React.useMemo(
-  //   () => data.columns.filter((column) => VISIBLE_FIELDS.includes(column.field)),
-  //   [data.columns],
-  // );
   const columns = [
     { field: 'commentId', headerName: 'ID' },
     { field: 'peopleName', headerName: 'Name', width: 150 },
@@ -65,8 +55,15 @@ const CommentTable = () => {
     }}>
 
       <DataGrid
+      
         sx={{
           border: "0px ",
+          '.MuiButton-root': {
+            /* background-color: green; */
+            /* box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); */
+            /* padding: 7px 14px; */
+            color: '#000'
+          }
         }}
         getRowId={comments => comments.commentId}
         rows={comments}
