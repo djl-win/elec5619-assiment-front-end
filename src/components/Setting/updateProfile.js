@@ -34,6 +34,10 @@ const UpdateProfile = (props) => {
     const adminPassword = values.password;
     const userConfirm = values.confirm;
     const AdminPeopleId = peopleInfo.peopleId;
+    const emailValid = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+    const phoneValid = /^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/
+    //Minimum eight characters, at least one letter, one number and one special character:
+    const passValid =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
 
     if (adminUsername === null || adminUsername === '') {
       warn("🦄 Please enter username!")
@@ -41,10 +45,16 @@ const UpdateProfile = (props) => {
     } else if (peopleEmail === null || peopleEmail === '') {
       warn("🦄 Please enter email!")
       return;
-    } else if (peoplePhone === null || peoplePhone === '') {
+    } else if (emailValid.test(peopleEmail) === false) {
+      warn("🦄 Please enter valid email!")
+      return;
+    }else if (peoplePhone === null || peoplePhone === '') {
       warn("🦄 Please enter phone!")
       return;
-    } else if (adminPassword === null || adminPassword === '') {
+    } else if (phoneValid.test(peoplePhone) === false) {
+      warn("🦄 Please enter valid phone number!")
+      return;
+    }else if (adminPassword === null || adminPassword === '') {
       warn("🦄 Please enter new password!")
       return;
     } else if (userConfirm === null || userConfirm === '') {
@@ -52,6 +62,9 @@ const UpdateProfile = (props) => {
       return;
     } else if (userConfirm !== adminPassword) {
       warn("🦄 confirm password Should be same as the password")
+      return;
+    } else if (passValid.test(adminPassword) === false) {
+      warn("🦄 password must contain minimum eight characters, at least one letter, one number and one special character!")
       return;
     } 
     //console.log(AdminPeopleId + " " + adminUsername  + " " + peopleEmail + " " + peoplePhone);

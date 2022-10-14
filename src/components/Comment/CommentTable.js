@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 
 function renderRating(params) {
+  console.log(params.value);
   return <Rating readOnly value={params.value} />;
 }
 

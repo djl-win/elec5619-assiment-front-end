@@ -68,3 +68,7 @@ export const reqAgeGroup=() =>ajax(BASE + '/5619/people/agePortrait',null,'GET')
 
 //查询所有的评论信息
 export const reqComments = () =>ajax(BASE + '/5619/comments/allComments',null,'GET')
+
+//query for all visitor
+export const reqVisitorData = () => ajax(BASE + '/5619/visitor/visitorRecord', null, 'GET')
+
