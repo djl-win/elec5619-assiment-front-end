@@ -32,12 +32,19 @@ const Footer = () => {
                 contrastText: "#FFFFFF",
             },
         },
-        custom: {
-            chatbot: {
-                headerBgColor: "#448aff",
-                botBubbleColor: "#448aff"
-            },
-          },
+
+        chatbot: {
+            background: "#f5f8fb",
+            fontFamily: "Nunito Sans",
+            headerBgColor: "#56A5EC",
+            headerFontColor: "#fff",
+            headerFontSize: "15px",
+            botBubbleColor: "#448aff",
+            botFontColor: "#fff",
+            userBubbleColor: "#fff",
+            userFontColor: "#4A4344"
+        },
+
 
 
     });
@@ -138,8 +145,10 @@ const Footer = () => {
                                 horizontal: 'center',
                                 }}
                             >   
-                                <ThemeProvider theme={theme.custom.chatbot}>
-                                    <ChatBot steps={steps} />
+                                <ThemeProvider theme={theme.chatbot}>
+                                    <ChatBot 
+                                    headerTitle="Customer Team"
+                                    steps={steps} />
                                 </ThemeProvider>
                                 
                             </Popover>
