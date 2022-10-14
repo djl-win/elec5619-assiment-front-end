@@ -32,8 +32,13 @@ const Footer = () => {
                 contrastText: "#FFFFFF",
             },
         },
-        headerBgColor: '#448aff',
-        botBubbleColor: '#448aff',
+        custom: {
+            chatbot: {
+                headerBgColor: "#448aff",
+                botBubbleColor: "#448aff"
+            },
+          },
+
 
     });
 
@@ -133,7 +138,9 @@ const Footer = () => {
                                 horizontal: 'center',
                                 }}
                             >   
+                                <ThemeProvider theme={theme.custom.chatbot}>
                                     <ChatBot steps={steps} />
+                                </ThemeProvider>
                                 
                             </Popover>
                     </div>
