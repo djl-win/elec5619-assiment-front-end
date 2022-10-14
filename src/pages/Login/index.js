@@ -159,6 +159,11 @@ class Login extends React.Component {
     const peopleAge = this.state.field.peopleAge;
     const peopleEmail = this.state.field.peopleEmail;
     const peoplePhone = this.state.field.peoplePhone;
+    const emailValid = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
+    const phoneValid = /^(?:\+?(61))? ?(?:\((?=.*\)))?(0?[2-57-8])\)? ?(\d\d(?:[- ](?=\d{3})|(?!\d\d[- ]?\d[- ]))\d\d[- ]?\d[- ]?\d{3})$/;
+    //Minimum eight characters, at least one letter, one number and one special character:
+    const passValid =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    const ageValid = /^[1-9][0-9]?$|^100$/;
 
     if (adminUsername === null || adminUsername === '') {
       warn("🦄 Please enter username!")
@@ -166,17 +171,29 @@ class Login extends React.Component {
     } else if (adminPassword === null || adminPassword === '') {
       warn("🦄 Please enter password!")
       return;
+    }else if (passValid.test(adminPassword) === false) {
+      warn("🦄 password must contain minimum eight characters, at least one letter, one number and one special character!")
+      return;
     } else if (peopleName === null || peopleName === '') {
       warn("🦄 Please enter name!")
       return;
     } else if (peopleAge === null || peopleAge === '') {
       warn("🦄 Please enter age!")
       return;
+    } else if (ageValid.test(peopleAge) === false) {
+      warn("🦄 Please enter valid age!")
+      return;
     } else if (peopleEmail === null || peopleEmail === '') {
       warn("🦄 Please enter email!")
       return;
+    } else if (emailValid.test(peopleEmail) === false) {
+      warn("🦄 Please enter valid email!")
+      return;
     } else if (peoplePhone === null || peoplePhone === '') {
       warn("🦄 Please enter phone!")
+      return;
+    } else if (phoneValid.test(peoplePhone) === false) {
+      warn("🦄 Please enter valid phone number!")
       return;
     }
     //2. 发送请求
