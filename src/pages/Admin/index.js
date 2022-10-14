@@ -3,6 +3,7 @@ import './index.css';
 import { Redirect, Route, Switch } from 'react-router-dom'
 import MySidebar from "../../components/Admin/MySidebar";
 import Header from "../../components/Admin/Header";
+import Footer from "../../components/Admin/Footer";
 import Dashboard from "../Dashboard";
 import Venue1 from "../Venue1"
 import Venue2 from "../Venue2"
@@ -19,6 +20,7 @@ import Box from '@mui/material/Box';
 
 
 class Admin extends React.Component {
+
 
     render() {
 
@@ -39,6 +41,7 @@ class Admin extends React.Component {
                 <Box sx={{ display: 'flex' }}>
                     <Header></Header>
                     <MySidebar></MySidebar>
+                    <Footer></Footer>
                 </Box>
                 
                 <Switch>
