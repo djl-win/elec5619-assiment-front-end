@@ -17,12 +17,11 @@ import { storageUtils } from "../../utils/storageUtils"
 class Login extends React.Component {
   state = {
 
-    //注册还是登录
+    //page switch between register and login
     showRegisterPage: 'none',
     showLoginPage: 'block',
 
-    //登录表单
-    //注册表单
+    //info that contain in the form
     field: {
       adminUsername: '',
       adminPassword: '',
@@ -33,24 +32,24 @@ class Login extends React.Component {
       peoplePhone: '',
     },
 
-    //验证码页面显示
+    //the verification code box was default as not invisible
     smsVisible: false,
 
-    //验证码
+    //verification code
     smsCode: '',
 
-    //错误信息
+    //error message
     errors: {}
 
   }
 
-  //页面加载时，移除内存中的登录storage
+  //remove user in storage when reloading page
   componentDidMount() {
     localStorage.removeItem("avatar")
     storageUtils.removeUser();
   }
 
-  //打开验证码页面
+  //open the verification dialog
   handleOpen = () => {
     this.setState({
       smsVisible: true,
@@ -58,7 +57,7 @@ class Login extends React.Component {
     })
   };
 
-  //关闭验证码页面
+  //close the verification dialog
   handleClose = () => {
     this.setState({
       smsVisible: false,
@@ -66,7 +65,7 @@ class Login extends React.Component {
     })
   }
 
-  //清理表单数据
+  //clear the from data
   handleCleanFormData = () => {
     this.setState({
       field: {
@@ -81,7 +80,7 @@ class Login extends React.Component {
     })
   };
 
-  //切换页面
+  //switch between register page and login page
   handlePageRegister = () => {
     this.setState({
       showRegisterPage: 'block',
@@ -90,7 +89,6 @@ class Login extends React.Component {
     this.handleCleanFormData();
   };
 
-  //切换页面
   handlePageLogin = () => {
     this.setState({
       showRegisterPage: 'none',
@@ -99,47 +97,40 @@ class Login extends React.Component {
     this.handleCleanFormData();
   };
 
-  //表单双向绑定，可优化
   handleChange = e => {
-    // e.preventDefault();
-    // //获取当前dom对象
-    // const target = e.target;
-    // //获取当前dom对象的name属性
-    // const name = target.name;
-    // //获取当前dom对象的value属性
-    // const value = target.type === 'checkbox' ? target.checked : target.value;
-    // //更新状态
 
-    // this.setState({
-    //   [name]: value
-    // })
     const { field } = this.state;
     field[e.target.name] = e.target.value;
     this.setState({ field });
   };
 
-  //登录提交，可优化表单验证
+  //log in 
   handleLogin = async (event) => {
-    //1. 阻止表单提交
+    //1. hold the post req
     event.preventDefault();
 
-    //2. 表单简单验证 
+    //2. verification
     const adminUsername = this.state.field.adminUsername;
     const adminPassword = this.state.field.adminPassword;
+    const passValid =/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
     if (adminUsername === null || adminUsername === '') {
       warn("🦄 Please enter username!")
       return;
     } else if (adminPassword === null || adminPassword === '') {
       warn("🦄 Please enter password!")
       return;
+    } else if (passValid.test(adminPassword) === false) {
+      warn("🦄 password must contain minimum eight characters, at least one letter, one number and one special character!")
+      return;
     }
 
-    //3. 发送请求
+    //3. send the req
     const response = await reqLogin(adminUsername, adminPassword);
 
-    //4. 处理请求
+    //4. process the req
     if (response.code === 200) {
-      //下一步验证码输入
+      //verification
       success("🦄 Sms Verification Code: " + response.data);
       this.handleOpen();
     } else {
@@ -148,10 +139,11 @@ class Login extends React.Component {
     }
   }
 
-  //注册提交,可优化表单验证
+  //register
   handleRegister = async (event) => {
+    // hold the post req
     event.preventDefault();
-    //1. 表单验证一下
+    //1. verification
     const adminUsername = this.state.field.adminUsername;
     const adminPassword = this.state.field.adminPassword;
     const peopleName = this.state.field.peopleName;
@@ -196,13 +188,13 @@ class Login extends React.Component {
       warn("🦄 Please enter valid phone number!")
       return;
     }
-    //2. 发送请求
+    //2. send the req
     // console.log(this.state.field)
     const response = await reqRegister(adminUsername, adminPassword, peopleName, peopleGender, peopleAge, peopleEmail, peoplePhone);
 
-    //3. 处理返回值
+    //3. process the req
     if (response.code === 200) {
-      //跳转页面
+      // redirect to home page
       this.handlePageLogin();
       success("🦄 " + response.data)
     } else {
@@ -211,32 +203,32 @@ class Login extends React.Component {
 
   };
 
-  //验证码提交
+  //verification code
   handleSmscode = async (event) => {
     event.preventDefault();
 
-    //1.验证表单
+    //1.check the input code
     const smsCode = this.state.smsCode;
     if (smsCode === null || smsCode === '') {
       warn("🦄 Please enter smsCode!")
       return;
     }
 
-    //2.提交表单
+    //2.send the req
     const response = await reqCheckCode(smsCode);
 
-    //3.数据验证
+    //3.process the req and action based on response code
     if (response.code === 200) {
 
-      //关闭dialog
+      //close dialog
       this.handleClose();
 
-      //存储用户的详细信息用于登录
+      //store user info into the local storage
 
-      //1.获取请求
+      //1.get admin info
       const res = await reqAdminInfo();
 
-      //2.绑定数据
+      //2.store the user info
       if (res.code === 200) {
         storageUtils.saveUser(res.data)
       } else {
@@ -245,13 +237,11 @@ class Login extends React.Component {
 
       localStorage.setItem("avatar", "https://api.multiavatar.com/goHD" + this.state.field.adminUsername + ".png")
 
-      //清楚数据
+      //clear form data
       this.handleCleanFormData();
 
-      //页面跳转
       this.props.history.push('/')
 
-      //提示信息
       success("🦄 Welcome!")
 
     } else {

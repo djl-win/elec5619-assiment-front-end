@@ -39,12 +39,12 @@ const VenueContainer1 = () => {
 
   const [venueCapacity, setVenueCapacity] = useState("")
 
-   //hook双向数据绑定
+   //handle the change in venue capacity
    const handleChange = (event) => {
     setVenueCapacity(event.target.value);
   };
 
-  //提交修改容量表单
+  //update the venue capacity
   const submitCapacityModificaiton = async() =>{
 
     const venueId = 1;
@@ -59,20 +59,20 @@ const VenueContainer1 = () => {
       setOpenDialog(false);
   }
 
-  //打开修改页面
+  //open the update venue capacity page
   const handleOpenDialog = () => {
     setVenueCapacity("");
     setOpenDialog(true);
   };
 
-  //关闭修改页面
+  //close the update venue capacity page
   const handleCloseDialog = () => {
     setVenueCapacity("");
     setOpenDialog(false);
   };
 
 
-  //获取博物馆容量
+  //get venue's capcity
   const handleMuseumCapacity = async () => {
     const venueId = 1;
     const response = await reqVenueCapacity(venueId);
@@ -85,7 +85,7 @@ const VenueContainer1 = () => {
 
   }
 
-  //获取博物馆实时客流量
+  //get venue's realtime visitor
   const handleRealTimeCapacity = async () => {
     const response = await reqRealTimeCapacityVenue();
     if (response.code === 200) {
@@ -100,7 +100,7 @@ const VenueContainer1 = () => {
 
   }
 
-  //获取博物馆当日总流量
+  //get venue's daily visitor
   const handleTodayTotalVisitor = async () => {
     const response = await reqVenueTodayTotalVisitor();
 
@@ -116,19 +116,19 @@ const VenueContainer1 = () => {
 
   }
 
-  //展示实时流量界面
+  //show real time visitor page
   const handleRealTimePage = () => {
     setRealTime("block");
     setSevenDays("none")
   }
 
-  //展示近7日流量页面
+  //show visitors in 7 days
   const handleSenvenDaysPage = () => {
     setRealTime("none");
     setSevenDays("block")
   }
 
-  //获取7日内数据
+  //get date in 7 days
   const handleSevenDaysData = async () => {
     const venueId = 1;
     const response = await reqVenueSevenDaysData(venueId);
@@ -139,7 +139,7 @@ const VenueContainer1 = () => {
     }
   }
 
-  //模拟类组件挂载阶段
+  //effect hook
   useEffect(() => {
     handleMuseumCapacity();
     handleRealTimeCapacity();
@@ -147,10 +147,9 @@ const VenueContainer1 = () => {
     handleSevenDaysData();
   }, [])
 
-  //定时五秒执行
+  //excuse every 5 second
   useEffect(() => {
     const timer = setInterval(() => {
-      // 注:在setCount中使用箭头函数是最好方式之一,只有一个timer生成
       handleMuseumCapacity();
       handleRealTimeCapacity();
       handleTodayTotalVisitor();

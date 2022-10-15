@@ -3,6 +3,7 @@ import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { reqAllGender } from "../../api";
 import {error} from "../../utils/message"
 
+//determining color for pie chart
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const RADIAN = Math.PI / 180;

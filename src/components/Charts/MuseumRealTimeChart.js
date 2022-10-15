@@ -70,7 +70,6 @@ const MuseumRealTimeChart = ({ show }) => {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            // 注:在setCount中使用箭头函数是最好方式之一,只有一个timer生成
             handleRealTimeVisitor();
 
         }, 2500)
@@ -80,7 +79,7 @@ const MuseumRealTimeChart = ({ show }) => {
 
     }, [realTimeVisitor]);//eslint-disable-line
 
-    //获取7日内的数据
+    //get data in 7 days
     const handleRealTimeVisitor = async () => {
         const temp = realTimeVisitor;
 

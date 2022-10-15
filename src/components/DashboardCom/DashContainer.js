@@ -40,12 +40,12 @@ const ChartContainer = () => {
 
   const [capacity, setCapacity] = useState("")
 
-  //hook双向数据绑定
+  //handle the change in  car spot capacity
   const handleChange = (event) => {
     setCapacity(event.target.value);
   };
 
-  //提交修改容量表单
+  //update the car spot capacity
   const submitCapacityModificaiton = async() =>{
     const response = await reqModifyParkingLotCapacity(capacity);
 
@@ -57,19 +57,19 @@ const ChartContainer = () => {
       setOpenDialog(false);
   }
 
-  //打开修改页面
+  //open the update car spot availability page
   const handleOpenDialog = () => {
     setCapacity("");
     setOpenDialog(true);
   };
 
-  //关闭修改页面
+  //close the update car spot availability page
   const handleCloseDialog = () => {
     setCapacity("");
     setOpenDialog(false);
   };
 
-  //获取7日内数据
+  //get date in 7 days
   const handleSevenDaysData = async () => {
     const response = await reqSevenDaysData();
     if (response.code === 200) {
@@ -79,7 +79,7 @@ const ChartContainer = () => {
     }
   }
 
-  //获取博物馆容量
+  //get museum's capacity
   const handleMuseumCapacity = async () => {
     const response = await reqMuseumCapacity();
 
@@ -91,7 +91,7 @@ const ChartContainer = () => {
 
   }
 
-  //获取博物馆实时客流量
+  //get real time visitor data
   const handleRealTimeCapacity = async () => {
     const response = await reqRealTimeCapacity();
 
@@ -103,7 +103,7 @@ const ChartContainer = () => {
 
   }
 
-  //获取博物馆当日总流量
+  //get the total visitor data
   const handleTodayTotalVisitor = async () => {
     const response = await reqTodayTotalVisitor();
 
@@ -115,7 +115,7 @@ const ChartContainer = () => {
 
   }
 
-  //获取停车场信息
+  //get real time availability for car spot
   const handleParkingLotInfo = async () => {
     const response = await reqParkingLotInfo();
     // console.log(response.data)
@@ -127,19 +127,19 @@ const ChartContainer = () => {
 
   }
 
-  //展示实时流量界面
+  //show the real time visitor chart
   const handleRealTimePage = () => {
     setRealTime("block");
     setSevenDays("none")
   }
 
-  //展示近7日流量页面
+  //show the visitors in 7 days chart
   const handleSenvenDaysPage = () => {
     setRealTime("none");
     setSevenDays("block")
   }
 
-  //模拟类组件挂载阶段
+  //effect hook
   useEffect(() => {
     handleMuseumCapacity();
     handleRealTimeCapacity();
@@ -150,11 +150,10 @@ const ChartContainer = () => {
   }, [])
 
 
-  //定时五秒执行
+  //excuse every 5 second
   useEffect(() => {
 
     const timer = setInterval(() => {
-      // 注:在setCount中使用箭头函数是最好方式之一,只有一个timer生成
       handleMuseumCapacity();
       handleRealTimeCapacity();
       handleTodayTotalVisitor();
