@@ -1,14 +1,11 @@
 import axios from 'axios';
 import {toast} from 'react-toastify';
-/* 
-    data:请求参数
-    type:请求方式
-*/
+
 
 export default function ajax(url, data = {}, type = 'GET') {
     return new Promise((resolve, reject) => {
-        let promise; //const使用时必须赋值
-        // 1.执行异步ajax请求
+        let promise; //use let, since const need give a initial value
+        // 1.excuse ajax 
         if (type === 'GET') {
             promise = axios.get(url, {
                 params: data
@@ -20,10 +17,10 @@ export default function ajax(url, data = {}, type = 'GET') {
         } else if(type === 'DELETE'){
             promise = axios.delete(url, data)
         } 
-        // 2.如果成功了，调用resolve(value)
+        // 2.if success can resolve
         promise.then(value => {
             resolve(value.data)
-            // 3.如果失败了，不调用reject(reason)，而是提示异常信息
+            // 3.if false then display the error message other then call the reject(reason)
         }).catch(error => {
             toast.error('something wrong: '+ error.message, {
                 position: "top-center",

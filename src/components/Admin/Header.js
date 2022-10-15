@@ -19,7 +19,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const Header = () => {
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  //hand open and close pop up menu in the header
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -28,7 +28,7 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
-  //开启博物馆
+  //open the museum
   const handleOpenMuseum = async() => {
     const response = await reqOpenMuseum();
 
@@ -40,7 +40,7 @@ const Header = () => {
     handleCloseUserMenu();
   };
 
-    //关闭博物馆
+    //close the museum
     const handleCloseMuseum = async() => {
       const response = await reqCloseMuseum();
   
@@ -51,6 +51,7 @@ const Header = () => {
       }
       handleCloseUserMenu();
     };
+    
     //define the theme
   const theme = createTheme({
     palette: {
@@ -67,7 +68,7 @@ const Header = () => {
 
   return (
     
-    <ThemeProvider theme={theme} >
+    <ThemeProvider theme={theme}>
       <AppBar position="absolute" sx={{height: "70px", boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)"}}>
         <Toolbar sx={{
           pr: '30px',

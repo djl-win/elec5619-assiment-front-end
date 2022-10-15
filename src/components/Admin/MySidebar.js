@@ -116,9 +116,9 @@ function MySidebar() {
               /> 
             </motion.div>
           </Link>
-          {/* groups */}
+          {/* side bar groups */}
           <div className="groups">
-            {/* group 1 */}
+            {/* dashboard */}
             <div className="group">
               <motion.h3
                 animate={{ opacity: open ? 1 : 0, height: open ? "auto" : 0 }}
@@ -129,7 +129,7 @@ function MySidebar() {
               {/* <Item icon={<BarChartRounded />} name="Performance" /> */}
             </div>
           </div>
-          {/* group 2 */}
+          {/* museum group*/}
           <div className="group">
             <motion.h3
               animate={{ opacity: open ? 1 : 0, height: open ? "auto" : 0 }}
@@ -140,7 +140,7 @@ function MySidebar() {
             <Item icon={<MuseumRounded />} name="Venue 2" address="/Venue2" />{" "}
             <Item icon={<MuseumRounded />} name="Venue 3" address="/Venue3" />
           </div>
-          {/* group 3 */}
+          {/*analysis group*/}
           <div className="group">
             <motion.h3
               animate={{ opacity: open ? 1 : 0, height: open ? "auto" : 0 }}

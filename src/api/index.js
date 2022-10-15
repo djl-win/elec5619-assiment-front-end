@@ -1,72 +1,71 @@
 import ajax from './ajax';
-// import axios from 'axios';
 
-const BASE = '' /* 空串是为了不让域名固定。因为有可能是3000端口，也有可能是3001，所以就不固定写3000 */
+const BASE = '' /* leave as empty because the port would be either 3000 and 3001 */
 
-// 登录接口
+// login
 export const reqLogin = (adminUsername, adminPassword) => ajax(BASE + '/5619/admins/login', {adminUsername, adminPassword}, 'PUT')
 
-//注册接口
+//sign up
 export const reqRegister = (adminUsername, adminPassword,peopleName,peopleGender,peopleAge,peopleEmail,peoplePhone) => ajax(BASE + '/5619/admins/register', {adminUsername, adminPassword,peopleName,peopleGender,peopleAge,peopleEmail,peoplePhone}, 'POST')
 
-//验证码接口
+//validation code
 export const reqCheckCode = (smsCode) => ajax(BASE + '/5619/admins/login/verify/'+ smsCode, null, 'GET')
 
-//查询管理员信息接口
+//query for admin's information
 export const reqAdminInfo= () => ajax(BASE + '/5619/admins/adminInfo', null, 'GET')
 
-//查询7日内的访客数据
+//query for visitor  data in past seven days
 export const reqSevenDaysData = () =>ajax(BASE + '/5619/visits/sevendays', null, 'GET')
 
-//查询博物馆的容量
+//query for museum's total capacity
 export const reqMuseumCapacity = () =>ajax(BASE + '/5619/visits/capacity', null, 'GET')
 
-//查询博物馆的实时流量
+//query for museum's real time capacity
 export const reqRealTimeCapacity = () =>ajax(BASE + '/5619/visits/today/totalrealtimeflow', null, 'GET')
 
-//查询当日总流量
+//query for total visitor in a single day
 export const reqTodayTotalVisitor = () =>ajax(BASE + '/5619/visits/today/totalflow', null, 'GET')
 
-//查询停车场信息
+//query for for park spot availability
 export const reqParkingLotInfo = () =>ajax(BASE + '/5619/parkinglots', null, 'GET')
 
-//开启博物馆
+//open the museum
 export const reqOpenMuseum = () =>ajax(BASE + '/5619/schedulers/start', null, 'GET')
 
-//关闭博物馆
+//close the museum
 export const reqCloseMuseum = () =>ajax(BASE + '/5619/schedulers/stop', null, 'GET')
 
-//获取分场馆七日内浏览记录
+//query for last 7 days visitors information for giving venue
 export const reqVenueSevenDaysData = (venueId) => ajax(BASE + '/5619/visits/sevendays/venue/'+ venueId, null, 'GET')
 
-//查询分场馆实时客流量
+//query for real time visitor for each venue
 export const reqRealTimeCapacityVenue= () =>ajax(BASE + '/5619/visits/today/eachvenuerealtimeflow', null, 'GET')
 
-//获取分场馆容量
+//query for giving venue's capacity
 export const reqVenueCapacity = (venueId) => ajax(BASE + '/5619/visits/capacity/'+ venueId, null, 'GET')
 
-//获取场馆当日总流量
+//query for the total visitor in current venue today
 export const reqVenueTodayTotalVisitor = () =>ajax(BASE + '/5619/visits/today/eachvenuetotalflow', null, 'GET')
 
-//修改停车场容量
+//update the car park capacity
 export const reqModifyParkingLotCapacity = (capacity) => ajax(BASE + '/5619/parkinglots/modifyCapacity/' + capacity, null, 'PUT')
 
-//修改场馆1的容量
+//update the capacity for giving venue
 export const reqModifyVenueCapacity = (venueId,venueCapacity) => ajax(BASE + '/5619/venues/modifyVenueCapacity', {venueId,venueCapacity}, 'PUT')
 
-//update profile, probably separte as pass and profile later
+//update profile, probably separate as pass and profile later
 export const reqUpdateProfile = (AdminPeopleId, adminUsername, peopleEmail, peoplePhone, adminPassword) => ajax(BASE + '/5619/admins/update', {AdminPeopleId, adminUsername, peopleEmail, peoplePhone, adminPassword}, 'POST')
 
-//查询7日内的访客性别比例
+//query for gender percentage in last 7 days
 export const reqSevenDaysGender=() =>ajax(BASE + '/5619/people/genderPortrait/sevendays',null,'GET')
 
-//查询全部访客的性别分布
+//query for gender percentage
 export const reqAllGender=() =>ajax(BASE + '/5619/people/genderPortrait/all',null,'GET')
 
-//查询全部访客的年龄分布
+//query for age percentage
 export const reqAgeGroup=() =>ajax(BASE + '/5619/people/agePortrait',null,'GET')
 
-//查询所有的评论信息
+//query for all comments
 export const reqComments = () =>ajax(BASE + '/5619/comments/allComments',null,'GET')
 
 //query for all visitor

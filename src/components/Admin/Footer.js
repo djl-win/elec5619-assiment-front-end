@@ -121,14 +121,10 @@ const Footer = () => {
             style ={{
                 position: 'absolute',
                 bottom: 0,
-                left: 0,
+                left: 30,
                 right: 0,
                 Width: "100%",
             }}>
-                    <Typography color="textSecondary" align="left">
-                    {"COMP5619 Group50  "}
-                    {new Date().getFullYear()}
-                    </Typography>
                     <div style ={{
                         float: "right"
                     }}>
