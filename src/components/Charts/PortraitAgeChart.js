@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { BarChart, Bar, Cell } from "recharts";
 import { reqAgeGroup } from "../../api";
+import { error } from '../../utils/message.js'
 
 export default function PortraitAgeChart({ show }) {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -30,6 +31,7 @@ export default function PortraitAgeChart({ show }) {
         },
         [setActiveIndex]
     );
+
     const handleAgeGroups = async () => {
         const response = await reqAgeGroup();
 
@@ -53,7 +55,7 @@ export default function PortraitAgeChart({ show }) {
             setAgeData(tempSec);
         }
         else {
-
+            error("🦄 " + response.msg);
         }
     }
     return (

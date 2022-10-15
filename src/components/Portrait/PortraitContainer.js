@@ -14,27 +14,24 @@ import PortraitGenderChartAll from '../Charts/PortraitGenderChartAll';
 import PortraitGenderChartDays from '../Charts/PortraitGenderChartDays';
 
 const PortraitContainer = () => {
-    // 图表属性设定
+    //switch between all gender chart and 7 days gender chart
     const [showAllGender, setshowAllGender] = useState("block")
 
     const [showSevenDaysGender, setshowSevenDaysGender] = useState("none")
 
     const [showAge, setAgeData] = useState("none")
 
-    // const [showType,setShowType] = useState("0")
 
     const showAllGenderChart = () => {
         setshowAllGender("block");
         setshowSevenDaysGender("none");
         setAgeData("none");
-        // setShowType("0");
 
     };
     const showSevenDaysGenderChart = () => {
         setshowAllGender("none");
         setshowSevenDaysGender("block");
         setAgeData("none");
-        // setShowType("1");
 
     };
     const showAgeChart = () => {
@@ -43,35 +40,6 @@ const PortraitContainer = () => {
         setAgeData("block");
     };
 
-    // // 获取数据-----
-    // const allGenderChartData=async () =>{
-    //     const response=await reqAllGender()
-    //     if (response.code === 200) {
-    //         //setSevenDaysData(response.data);
-    //       } else {
-    //         error("🦄 " + response.msg);
-    //       }
-    // }
-    // const sevenDaysChartData=async () =>{
-    //     const response =await reqSevenDaysGender()
-    //     if (response.code === 200) {
-    //         //setSevenDaysData(response.data);
-    //       } else {
-    //         error("🦄 " + response.msg);
-    //       }
-
-    // }
-    // const ageChartData=async () =>{
-    //     const response =await reqAgeGroup()
-    //     if (response.code === 200) {
-    //         //setSevenDaysData(response.data);
-    //       } else {
-    //         error("🦄 " + response.msg);
-    //       }
-
-    // }
-
-    // 图表显示-----
     const theme = createTheme({
         palette: {
             primary: {
