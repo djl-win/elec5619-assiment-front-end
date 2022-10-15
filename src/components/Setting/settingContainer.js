@@ -10,12 +10,7 @@ import SettingsPassword from "./updateProfile";
 const settingContainer = () => {
   //define the theme
   const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#FFFFFF",
-        contrastText: "000000"
-      },
-    },
+   
     
   });
 

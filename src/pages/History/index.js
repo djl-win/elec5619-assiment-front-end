@@ -1,5 +1,5 @@
 import React from 'react';
-import HistoryCon from "../../components/History/HistoryContainer";
+import HistoryContainer from "../../components/History/HistoryContainer";
 import Fade from '@mui/material/Fade';
 
 class History extends React.Component {
@@ -7,7 +7,7 @@ class History extends React.Component {
         return (
             <Fade in={true}>
                 <div className="admin_History">
-                    <HistoryCon></HistoryCon>
+                    <HistoryContainer></HistoryContainer>
                 </div>
             </Fade>
         )

@@ -71,3 +71,6 @@ export const reqComments = () =>ajax(BASE + '/5619/comments/allComments',null,'G
 //query for all visitor
 export const reqVisitorData = () => ajax(BASE + '/5619/visitor/visitorRecord', null, 'GET')
 
+//query for history
+export const reqHistory = (startTime,endTime,venueId) => ajax(BASE + '/5619/visits/search/record', {startTime,endTime,venueId}, 'POST')
+
