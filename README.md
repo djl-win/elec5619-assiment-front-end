@@ -19,3 +19,7 @@ USYD 2022 S2 COMP5619 assignment 2 Group 50 -- frontend
 login page：http://localhost:3000/login   
 
 password validation: minimum eight characters, at least one letter, one number and one special character  
+
+## License
+
+This project is licensed under the GNU GPLv3 License - see the [LICENSE](https://github.com/djl-win/elec5619-assiment-front-end/blob/master/LICENSE) file for details.
